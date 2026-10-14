@@ -203,12 +203,52 @@ footer img{height:27px;filter:brightness(0) invert(1);margin-bottom:18px}footer 
   .mb a.p{background:#2B93DD}
   body{padding-bottom:50px}
 }
+
+/* v4 */
+.nav ul{align-items:center}
+.nav ul>li>a{display:inline-flex;align-items:center;line-height:1.2}
+.tb{overflow:visible;position:relative;z-index:3}.nav.on .tb{overflow:hidden}
+.tb-call{position:relative;display:flex;align-items:center}
+.tb-call>a:after{content:"";display:inline-block;width:5px;height:5px;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:rotate(45deg);margin:-3px 0 0 8px}
+.tb-call:before{content:"";position:absolute;left:0;right:0;top:100%;height:12px}
+.callp{position:absolute;top:calc(100% + 4px);left:-18px;width:310px;background:#fff;color:#0A2036;border:1px solid #D5DDE6;padding:16px 20px 12px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s,transform .25s,visibility .25s}
+.tb-call:hover .callp,.tb-call:focus-within .callp{opacity:1;visibility:visible;transform:none}
+.callp b{display:block;font-size:15px;margin-bottom:8px;padding-bottom:10px;border-bottom:1px solid #D5DDE6}
+.tb .callp a{display:flex;justify-content:space-between;gap:16px;padding:7px 0;font-size:14px;font-weight:600;color:#0A2036;opacity:1}
+.callp a span{font-weight:500;color:#546579}.tb .callp a:hover{color:#066AAB;text-decoration:none}
+.sin .btn:not(.ol2){background:#fff;color:#0B2B47}.sin .btn:not(.ol2):hover{background:#071E34;color:#fff}
+.sin-b{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn.ol2{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.6)}.btn.ol2:hover{background:#fff;color:#0B2B47}
+.sin-as{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.35);padding-top:34px}
+.sin-as h3{font-size:clamp(20px,1.8vw,28px);margin-bottom:20px;letter-spacing:-.02em;font-weight:600}
+.as-g{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.as-g a{position:relative;overflow:hidden;background:#fff;height:84px;display:flex;align-items:center;justify-content:center}
+.as-g img{max-width:112px;max-height:34px;object-fit:contain}
+.as-g span{position:absolute;inset:auto 0 0 0;background:#0B2B47;color:#fff;font-size:13px;font-weight:700;padding:7px;text-align:center;transform:translateY(100%);transition:transform .3s}
+.as-g a:hover span,.as-g a:focus span{transform:none}
+.as-n{margin-top:14px;font-size:13px;opacity:.75}
+.cb-btns{display:flex;gap:12px;flex-wrap:wrap}
+@media(hover:none){.as-g span{transform:none;position:static;background:none;color:#066AAB;padding:0}.as-g a{flex-direction:column;gap:4px}}
+@media(max-width:900px){.as-g{grid-template-columns:repeat(2,1fr)}.callp{display:none}}
+.cbC{padding:clamp(70px,9vw,130px) var(--pad);background:var(--paper)}
+.cbC h2{font-size:clamp(34px,5vw,84px);max-width:15ch;margin-bottom:16px}.cbC-p{color:var(--mut);max-width:34em;font-size:18px}
+.cbC-g{display:grid;grid-template-columns:240px 1fr 1fr;gap:28px;align-items:stretch;margin-top:40px}
+.cbC-tabs{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.cbC-tabs button{background:none;border:0;border-bottom:1px solid var(--line);text-align:left;font:600 20px Sora,sans-serif;letter-spacing:-.02em;color:var(--mut);padding:20px 4px;cursor:pointer;position:relative;transition:color .3s,padding .3s}
+.cbC-tabs button.on{color:var(--ink);padding-left:18px}.cbC-tabs button.on:after{content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:3px;background:var(--blue)}
+.cbC-img{position:relative;overflow:hidden;min-height:340px;background:var(--navy)}
+.cbC-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .6s,transform 1.2s}.cbC-img img.on{opacity:1;transform:none}
+.cbC-tx{display:flex;flex-direction:column;justify-content:center;gap:16px;min-width:0}
+.cbC-tx h3{font-size:clamp(26px,2.8vw,44px)}.cbC-tx p{color:var(--mut);font-size:18px}
+.cbC-tx ul{list-style:none;display:grid;gap:8px;font-weight:600}.cbC-tx li:before{content:"";display:inline-block;width:20px;height:1px;background:currentColor;vertical-align:middle;margin-right:10px}
+.cbC-tx .btn.ol{color:var(--ink)}
+@media(max-width:1000px){.cbC-g{grid-template-columns:1fr}.cbC-tabs{flex-direction:row;overflow-x:auto;border-top:0}.cbC-tabs button{white-space:nowrap;padding:14px 18px;font-size:17px}.cbC-tabs button.on{padding-left:18px}.cbC-tabs button.on:after{top:auto;bottom:-1px;height:3px;width:100%;left:0;right:0}.cbC-img{min-height:240px}}
 </style>
 </head>
 <body>
 <header class="nav" id="nav">
   <div class="tb">
-    <div class="tb-l"><a href="tel:+34981325961">981 325 961</a><a href="#siniestros">Siniestros 24 h</a></div>
+    <div class="tb-l"><div class="tb-call"><a href="#oficinas">Llámanos</a><div class="callp"><b>Elige tu oficina</b><a href="tel:+34981325961"><span>Narón · Sede central</span>981 325 961</a><a href="tel:+34981287205"><span>A Coruña</span>981 287 205</a><a href="tel:+34986267829"><span>Vigo</span>986 267 829</a><a href="tel:+34986367945"><span>Nigrán</span>986 367 945</a><a href="tel:+34986850922"><span>Pontevedra</span>986 850 922</a><a href="tel:+34986718470"><span>Ribadumia</span>986 718 470</a><a href="tel:+34986487582"><span>Sanxenxo</span>986 487 582</a></div></div><a href="#siniestros">Siniestros</a></div>
     <div class="tb-r"><a href="https://www.cascudo.es/area-clientes/">Área de clientes</a><a href="#colaboradores">Área de colaboradores</a><a class="tb-hl" href="https://www.cascudo.es/hazte-colaborador-de-seguros/">¡Hazte colaborador!</a></div>
   </div>
   <div class="nv">
@@ -235,7 +275,7 @@ footer img{height:27px;filter:brightness(0) invert(1);margin-bottom:18px}footer 
 <section class="hero" id="hero">
   <div class="l">
     <h1>¿Qué quieres proteger?</h1>
-    <p class="sub">Somos tu correduría de seguros independiente. Elige y comparamos más de 80 aseguradoras para encontrar la mejor opción para ti.</p>
+    <p class="sub">Somos tu correduría de seguros independiente. Elige y comparamos más de 80 aseguradoras para encontrar la mejor opción para ti. Atención en toda España.</p>
     <ul class="sel" id="sel"></ul>
   </div>
   <div class="r">
@@ -247,7 +287,7 @@ footer img{height:27px;filter:brightness(0) invert(1);margin-bottom:18px}footer 
 <section class="qa" aria-label="Accesos rápidos">
   <a href="https://www.cascudo.es/solicitar-presupuesto/"><b>Pedir presupuesto</b><span>Te respondemos con la mejor opción.</span><i>→</i></a>
   <a href="https://www.cascudo.es/area-clientes/"><b>Área de clientes</b><span>Accede a tu zona privada.</span><i>→</i></a>
-  <a href="#siniestros"><b>Siniestros 24 h</b><span>Te ayudamos ahora mismo.</span><i>→</i></a>
+  <a href="#siniestros"><b>Siniestros</b><span>Te ayudamos a gestionarlos.</span><i>→</i></a>
   <a href="#colaboradores"><b>Colaboradores</b><span>Accede o únete a la red.</span><i>→</i></a>
 </section>
 <section class="sec">
@@ -256,9 +296,9 @@ footer img{height:27px;filter:brightness(0) invert(1);margin-bottom:18px}footer 
     <div class="bc ph"><img src="assets/img/asesora.webp" alt="" loading="lazy"><div><h3>Atención personal, en siete oficinas</h3><p>Te asesoramos en persona, por teléfono, por WhatsApp y online. Siempre con un equipo que te conoce.</p></div></div>
     <div class="bc a dk"><b><em data-to="31">31</em></b><span>años de experiencia como correduría</span></div>
     <div class="bc b"><b>+<em data-to="80">80</em></b><span>aseguradoras entre las que comparar</span></div>
-    <div class="bc c"><b><em data-to="7">7</em></b><span>oficinas en Galicia y clientes en toda España</span></div>
-    <div class="bc d dk"><b><em data-to="24">24</em>h</b><span>asistencia ante un siniestro</span></div>
-    <div class="bc reg" style="grid-column:span 12"><b>Registrada en la DGSFP</b><span>Correduría de seguros con clave J2354. Independiente: no pertenecemos a ninguna aseguradora.</span></div>
+    <div class="bc c"><b><em data-to="7">7</em></b><span>oficinas y clientes en toda España</span></div>
+    <div class="bc d dk"><b><em data-to="100">100</em>%</b><span>independientes: no pertenecemos a ninguna aseguradora</span></div>
+    <div class="bc reg" style="grid-column:span 12"><b>Registrada en la DGSFP</b><span>Correduría de seguros con clave J2354. Atendemos a clientes en toda España.</span></div>
   </div>
 </section>
 
@@ -278,27 +318,32 @@ footer img{height:27px;filter:brightness(0) invert(1);margin-bottom:18px}footer 
 
 <section class="sin" id="siniestros">
   <div class="sin-t">
-    <h2>¿Has tenido un siniestro? Estamos contigo.</h2>
-    <p>Nuestro departamento de siniestros te guía y gestiona el parte con la aseguradora. Asistencia las 24 horas.</p>
-    <a class="sin-tel" href="tel:+34981325961">981 325 961</a>
+    <h2>¿Has tenido un siniestro?</h2>
+    <p>Llama a tu oficina en su horario de atención y nos ocupamos de gestionar el parte con la aseguradora. Fuera de horario, tienes el teléfono de asistencia 24 h de tu compañía.</p>
+    <div class="sin-b"><a class="btn" href="#oficinas">Llamar a mi oficina <span class="ar">→</span></a><a class="btn ol2" href="#asistencia">Asistencia 24 h de mi aseguradora</a></div>
   </div>
   <ol class="sin-s">
-    <li><b>Llámanos</b><span>A tu oficina o a nuestro teléfono de asistencia, a cualquier hora.</span></li>
+    <li><b>Llama a tu oficina</b><span>En su horario de atención, o a tu aseguradora si es fuera de horario.</span></li>
     <li><b>Nos ocupamos del parte</b><span>Lo gestionamos con la aseguradora para que tú no pierdas tiempo.</span></li>
     <li><b>Te acompañamos hasta el final</b><span>Seguimiento del siniestro hasta que queda resuelto.</span></li>
   </ol>
+  <div class="sin-as" id="asistencia">
+    <h3>Teléfonos de asistencia 24 h de cada compañía</h3>
+    <div class="as-g"><a href="#asistencia"><img src="assets/img/logo-adeslas.png" alt="adeslas" loading="lazy"><span>Ver teléfono</span></a><a href="#asistencia"><img src="assets/img/logo-allianz.png" alt="allianz" loading="lazy"><span>Ver teléfono</span></a><a href="#asistencia"><img src="assets/img/logo-axa.png" alt="axa" loading="lazy"><span>Ver teléfono</span></a><a href="#asistencia"><img src="assets/img/logo-dkv.png" alt="dkv" loading="lazy"><span>Ver teléfono</span></a><a href="#asistencia"><img src="assets/img/logo-reale.png" alt="reale" loading="lazy"><span>Ver teléfono</span></a><a href="#asistencia"><img src="assets/img/logo-zurich.png" alt="zurich" loading="lazy"><span>Ver teléfono</span></a><a href="#asistencia"><img src="assets/img/logo-occident.png" alt="occident" loading="lazy"><span>Ver teléfono</span></a><a href="#asistencia"><img src="assets/img/logo-sanitas.png" alt="sanitas" loading="lazy"><span>Ver teléfono</span></a><a href="#asistencia"><img src="assets/img/logo-asisa.png" alt="asisa" loading="lazy"><span>Ver teléfono</span></a><a href="#asistencia"><img src="assets/img/logo-arag.png" alt="arag" loading="lazy"><span>Ver teléfono</span></a></div>
+    <p class="as-n">En la web real, cada logotipo enlaza con el teléfono de asistencia oficial de la compañía.</p>
+  </div>
 </section>
-<section class="col" id="colaboradores">
-  <figure><img src="assets/img/colegas.webp" alt="Equipo celebrando un acuerdo" loading="lazy"></figure>
-  <div>
-    <h2>Colabora con Cascudo.</h2>
-    <p>Si tienes una inmobiliaria, asesoría, clínica u otro negocio con clientes que necesitan seguros, puedes colaborar con nosotros y contar con el respaldo y la formación de una correduría registrada.</p>
-    <ul><li>Respaldo de una correduría registrada en la DGSFP</li><li>Formación para tu equipo</li><li>Más de 80 aseguradoras para tus clientes</li></ul>
-    <div class="col-b"><a class="btn" href="https://www.cascudo.es/hazte-colaborador-de-seguros/">Quiero ser colaborador <span class="ar">→</span></a><a class="btn ol" href="#">Ya soy colaborador: acceder al área</a></div>
+<section class="cb cbC" id="colaboradores">
+  <h2>Colabora con Cascudo.</h2>
+  <p class="cbC-p">¿Qué tipo de negocio tienes? Elige y te mostramos cómo podemos trabajar juntos.</p>
+  <div class="cbC-g">
+    <div class="cbC-tabs" id="cbt" role="tablist"></div>
+    <div class="cbC-img" id="cbi"></div>
+    <div class="cbC-tx"><h3 id="cbh"></h3><p id="cbp"></p><ul id="cbl"></ul><div class="cb-btns"><a class="btn" href="https://www.cascudo.es/hazte-colaborador-de-seguros/">Quiero ser colaborador <span class="ar">→</span></a><a class="btn ol" href="#">Área de colaboradores</a></div></div>
   </div>
 </section>
 <section class="sec" id="oficinas">
-  <h2>Siete oficinas en Galicia.</h2>
+  <h2>Siete oficinas. Atención en toda España.</h2>
   <div class="offs">
     <div class="of hq"><h3>Narón</h3><small>Sede central<br>Av. do Mar 148, 2ª Polígono · 15570</small><a href="tel:+34981325961">981 325 961</a></div>
     <div class="of"><h3>A Coruña</h3><small>C/ Novoa Santos 4, bajo · 15006</small><a href="tel:+34981287205">981 287 205</a></div>
@@ -316,7 +361,7 @@ footer img{height:27px;filter:brightness(0) invert(1);margin-bottom:18px}footer 
     <h2>Hablemos de tu seguro.</h2>
     <p class="fin-p">Cuéntanos qué necesitas y te llamamos. Sin compromiso.</p>
     <ul class="fin-c">
-      <li><small>Teléfono</small><a href="tel:+34981325961">981 325 961</a></li>
+      <li><small>Teléfono</small><a href="#oficinas">Elige tu oficina y llámanos →</a></li>
       <li><small>Email</small><a href="mailto:cascudo@cascudo.es">cascudo@cascudo.es</a></li>
       <li><small>Oficinas</small><a href="#oficinas">Narón · A Coruña · Vigo · Pontevedra · Nigrán · Ribadumia · Sanxenxo</a></li>
     </ul>
@@ -332,10 +377,10 @@ footer img{height:27px;filter:brightness(0) invert(1);margin-bottom:18px}footer 
 </section>
 
 <footer>
-  <div><img src="assets/img/logo-cascudo.png" alt="Cascudo" width="208" height="27"><p>Correduría de seguros independiente con sede en Narón y oficinas en toda Galicia. Atendemos a clientes de toda España.</p></div>
+  <div><img src="assets/img/logo-cascudo.png" alt="Cascudo" width="208" height="27"><p>Correduría de seguros independiente con sede en Narón y siete oficinas. Atendemos a clientes de toda España.</p></div>
   <div><h4>Particulares</h4><ul><li>Coche y moto</li><li>Hogar</li><li>Salud</li><li>Vida</li></ul></div>
   <div><h4>Empresas</h4><ul><li>Comercios</li><li>Responsabilidad civil</li><li>Colectivos</li><li>Flotas</li></ul></div>
-  <div><h4>Contacto</h4><ul><li>981 325 961</li><li>cascudo@cascudo.es</li></ul></div>
+  <div><h4>Contacto</h4><ul><li><a href="#oficinas">Teléfono de cada oficina</a></li><li>cascudo@cascudo.es</li></ul></div>
 </footer>
 <div class="legal">Cascudo Correduría de Seguros · Inscrita en la DGSFP con clave J2354 · Maqueta de propuesta de diseño: contenidos reales de cascudo.es.</div>
 
@@ -406,15 +451,27 @@ if(window.gsap&&window.ScrollTrigger&&!reduce){
 </script>
 <script>
 (function(){if(!(window.gsap&&window.ScrollTrigger)||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
-gsap.utils.toArray(".sin h2,.col h2").forEach(function(e){gsap.from(e,{y:56,opacity:0,duration:1,ease:"power3.out",scrollTrigger:{trigger:e,start:"top 88%"}})});
+gsap.utils.toArray(".sin h2,.cb h2").forEach(function(e){gsap.from(e,{y:56,opacity:0,duration:1,ease:"power3.out",scrollTrigger:{trigger:e,start:"top 88%"}})});
 gsap.from(".col figure",{clipPath:"inset(0 0 100% 0)",duration:1.3,ease:"power3.inOut",scrollTrigger:{trigger:".col",start:"top 72%"}});
 gsap.from(".sin-s li",{opacity:0,y:30,stagger:.14,duration:.8,ease:"power3.out",scrollTrigger:{trigger:".sin-s",start:"top 85%"}});})();
 </script>
-<nav class="mb" aria-label="Acciones rápidas"><a href="tel:+34981325961">Llamar</a><a class="p" href="https://www.cascudo.es/solicitar-presupuesto/">Presupuesto</a><a href="https://www.cascudo.es/area-clientes/">Mi área</a></nav>
+<nav class="mb" aria-label="Acciones rápidas"><a href="#oficinas">Llamar</a><a class="p" href="https://www.cascudo.es/solicitar-presupuesto/">Presupuesto</a><a href="https://www.cascudo.es/area-clientes/">Mi área</a></nav>
 <script>
 (function(){var n=document.getElementById("nav"),b=n&&n.querySelector(".bur");if(!b)return;
 b.addEventListener("click",function(){var o=n.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false")});
 n.querySelectorAll("ul a").forEach(function(a){a.addEventListener("click",function(){n.classList.remove("open");b.setAttribute("aria-expanded","false")})})})();
+</script>
+<script>
+(function(){var D=[{n:"Inmobiliaria",i:"reunion",t:"Protege a tus clientes y su vivienda",p:"Quien compra o alquila necesita seguros. Tú das la solución y nosotros el respaldo.",l:["Seguro de hogar","Impago de alquiler","Antiokupas"]},
+{n:"Asesoría",i:"rc",t:"Protege la actividad de tus clientes",p:"Autónomos y pymes necesitan cubrir su negocio. Tú los asesoras y nosotros nos ocupamos del seguro.",l:["Responsabilidad civil","Comercios y pymes","Salud para empresas"]},
+{n:"Clínica",i:"salud",t:"Protege tu consulta y a tu equipo",p:"Cobertura para tu actividad profesional y para las personas que trabajan contigo.",l:["Responsabilidad civil","Salud para empresas","Accidentes colectivos"]},
+{n:"Otro negocio",i:"colegas",t:"Si tus clientes necesitan seguros, colabora",p:"Contarás con el respaldo y la formación de una correduría registrada.",l:["Respaldo de una correduría registrada","Formación para tu equipo","Más de 80 aseguradoras"]}];
+var tabs=document.getElementById("cbt"),im=document.getElementById("cbi"),h=document.getElementById("cbh"),p=document.getElementById("cbp"),l=document.getElementById("cbl");if(!tabs)return;
+tabs.innerHTML=D.map(function(d,k){return'<button type="button" role="tab" data-k="'+k+'">'+d.n+"</button>"}).join("");
+im.innerHTML=D.map(function(d){return'<img src="assets/img/'+d.i+'.webp" alt="" loading="lazy">'}).join("");
+var bs=[].slice.call(tabs.children),is=[].slice.call(im.children);
+function go(k){bs.forEach(function(b,i){b.classList.toggle("on",i===k);b.setAttribute("aria-selected",i===k)});is.forEach(function(x,i){x.classList.toggle("on",i===k)});var d=D[k];h.textContent=d.t;p.textContent=d.p;l.innerHTML=d.l.map(function(x){return"<li>"+x+"</li>"}).join("")}
+bs.forEach(function(b,i){b.addEventListener("click",function(){go(i)});b.addEventListener("mouseenter",function(){if(matchMedia("(hover:hover)").matches)go(i)})});go(0);})();
 </script>
 </body>
 </html>
