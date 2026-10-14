@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cascudo · Propuesta C · Plataforma</title>
+<style>
+@font-face{font-family:Sora;src:url(assets/fonts/sora.woff2) format("woff2");font-weight:100 800;font-display:swap}
+@font-face{font-family:Manrope;src:url(assets/fonts/manrope.woff2) format("woff2");font-weight:200 800;font-display:swap}
+:root{--navy:#0B2B47;--navy2:#123C63;--ink:#071E34;--blue:#2B93DD;--blue-d:#066AAB;--paper:#F2F5F9;--line:#D6DEE8;--mut:#566A80;--pad:clamp(20px,5vw,84px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:17px;line-height:1.55}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:Sora,sans-serif;font-weight:600;letter-spacing:-.035em;line-height:1.04}
+/* cabecera */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px var(--pad);color:#fff;transition:background .4s,color .4s,padding .4s,border-color .4s;border-bottom:1px solid transparent}
+.nav.on{background:rgba(242,245,249,.94);backdrop-filter:blur(12px);color:var(--ink);padding-block:14px;border-color:var(--line)}
+.nav img{height:27px;filter:brightness(0) invert(1);transition:filter .4s}.nav.on img{filter:none}
+.nav ul{display:flex;gap:32px;list-style:none;font-size:15px;font-weight:600}
+.nav ul a{opacity:.85}.nav ul a:hover{opacity:1}
+.nav .r{display:flex;gap:22px;align-items:center;font-size:15px;font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--blue);color:#fff;padding:15px 26px;font-weight:700;font-size:15px;border-radius:2px;transition:background .3s}
+.btn:hover{background:var(--blue-d)}.btn .ar{transition:transform .3s}.btn:hover .ar{transform:translateX(5px)}
+.btn.o{background:transparent;color:inherit;border:1px solid currentColor}.btn.o:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+@media(max-width:900px){.nav ul,.nav .r>a:first-child{display:none}}
+/* hero selector */
+.hero{background:var(--navy);color:#fff;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero .l{padding:108px var(--pad) 40px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.hero h1{font-size:clamp(38px,5vw,84px);margin-bottom:20px;max-width:12ch}
+.hero .sub{color:rgba(255,255,255,.75);max-width:30em;margin-bottom:24px;font-size:clamp(15px,1.2vw,18px)}
+.sel{list-style:none;border-top:1px solid rgba(255,255,255,.22);max-width:560px}
+.sel li{position:relative;display:flex;justify-content:space-between;align-items:center;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.22);font-family:Sora;font-weight:500;font-size:clamp(17px,1.6vw,24px);letter-spacing:-.02em;cursor:pointer;color:rgba(255,255,255,.55);transition:color .3s,padding .4s cubic-bezier(.2,.8,.2,1)}
+.sel li span.n{font-family:Manrope;font-size:13px;font-weight:700;color:inherit;opacity:.7}
+.sel li:hover{color:#fff}
+.sel li.on{color:#fff;padding-left:18px}
+.sel li:after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--blue);transform:scaleX(0);transform-origin:left}
+.sel li.on:after{transform:scaleX(1);transition:transform var(--dur,5s) linear}
+.hero .r{position:relative;min-height:60vh}
+.pic{position:absolute;inset:0}.hero .r:before{content:"";position:absolute;inset:0 0 auto 0;height:150px;z-index:3;background:linear-gradient(180deg,rgba(7,30,52,.8),transparent);pointer-events:none}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 0 100%);transition:clip-path 1s cubic-bezier(.7,0,.2,1)}
+.pic img.on{clip-path:inset(0 0 0 0)}
+.pic img.on{animation:kb 9s ease-out forwards}
+@keyframes kb{from{transform:scale(1.1)}to{transform:scale(1)}}
+.cap{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:60px var(--pad) 44px 40px;background:linear-gradient(0deg,rgba(7,30,52,.92),transparent);display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.cap h3{font-size:clamp(24px,2.6vw,42px);margin-bottom:8px}.cap p{color:rgba(255,255,255,.82);max-width:26em;font-size:16px}
+.cap .btn{flex:0 0 auto}
+.cap .t{transition:opacity .35s,transform .35s}.cap .t.sw{opacity:0;transform:translateY(12px)}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero .l{padding-top:120px}.hero .r{min-height:56vh}.cap{padding-right:20px;flex-direction:column;align-items:flex-start}}
+/* bento */
+.sec{padding:120px var(--pad)}
+.sec h2{font-size:clamp(34px,5vw,84px);max-width:15ch;margin-bottom:56px}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(210px,auto);gap:14px}
+.bc{position:relative;background:#fff;border:1px solid var(--line);padding:30px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;isolation:isolate}
+.bc:before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(43,147,221,.16),transparent 65%)}
+.bc:hover:before{opacity:1}
+.bc b{font-family:Sora;font-weight:600;font-size:clamp(54px,6vw,104px);letter-spacing:-.05em;line-height:1}
+.bc b em{font-style:normal;color:var(--blue-d)}
+.bc span{color:var(--mut);font-size:16px;max-width:18em}
+.bc.ph{grid-column:span 5;grid-row:span 2;color:#fff;border:0;padding:0}
+.bc.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.bc.ph:hover img{transform:scale(1.05)}
+.bc.ph:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(7,30,52,.9),transparent 60%)}
+.bc.ph div{margin-top:auto;padding:30px}.bc.ph h3{font-size:clamp(24px,2.4vw,38px);margin-bottom:8px}.bc.ph p{color:rgba(255,255,255,.85);max-width:24em}
+.bc.a{grid-column:span 3}.bc.b{grid-column:span 4}.bc.c{grid-column:span 4}.bc.d{grid-column:span 3}
+.bc.dk{background:var(--navy);color:#fff;border-color:var(--navy)}.bc.dk span{color:rgba(255,255,255,.78)}.bc.dk b em{color:#7CC0F2}
+.bc.dk:before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.14),transparent 65%)}
+.bc.reg b{font-size:clamp(34px,3.4vw,54px)}
+@media(max-width:900px){.bento{grid-template-columns:1fr 1fr}.bc.ph{grid-column:span 2;min-height:360px}.bc.a,.bc.b,.bc.c,.bc.d{grid-column:span 1}}
+/* convergencia */
+.cv{background:var(--ink);color:#fff;position:relative}
+.cv-pin{min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden;padding:100px var(--pad) 70px}
+.cv h2{position:absolute;top:100px;left:var(--pad);font-size:clamp(34px,5vw,84px);max-width:11ch;z-index:2}
+.stage{position:relative;width:min(100%,1100px);height:min(64vh,560px)}
+.core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:170px;height:170px;border-radius:50%;background:var(--blue);display:grid;place-items:center;z-index:3;text-align:center;font-family:Sora;font-weight:600;font-size:20px;line-height:1.15}
+.core:before,.core:after{content:"";position:absolute;inset:-18px;border:1px solid rgba(43,147,221,.55);border-radius:50%;animation:ping2 3s infinite}
+.core:after{animation-delay:1.5s}
+@keyframes ping2{from{transform:scale(.85);opacity:1}to{transform:scale(1.7);opacity:0}}
+.fl{position:absolute;left:50%;top:50%;width:132px;height:68px;margin:-34px 0 0 -66px;background:#fff;display:grid;place-items:center;will-change:transform,opacity}
+.fl img{max-width:96px;max-height:36px;object-fit:contain}
+.caps{position:absolute;left:var(--pad);right:var(--pad);bottom:46px;display:grid;text-align:center;z-index:2}
+.caps p{grid-area:1/1;font-family:Sora;font-size:clamp(20px,2.4vw,36px);font-weight:500;letter-spacing:-.025em}
+html:not(.js) .caps p+p{display:none}
+.cv.stat .stage{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-content:center;height:auto}
+.cv.stat .fl{position:static;margin:0}.cv.stat .core{position:static;transform:none;order:-1;margin:0 100% 30px}
+@media(max-width:900px){.cv h2{position:static;margin-bottom:40px}.cv-pin{display:block;padding-top:110px}.caps{position:static;margin-top:40px}}
+/* tabs ramos */
+.tabs{display:flex;gap:6px;margin-bottom:34px;border-bottom:1px solid var(--line)}
+.tab{background:none;border:0;font:600 17px Sora;letter-spacing:-.02em;padding:14px 26px;cursor:pointer;color:var(--mut);position:relative}
+.tab.on{color:var(--ink)}.tab.on:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;perspective:1100px}
+.tile{position:relative;height:clamp(280px,26vw,380px);overflow:hidden;background:var(--navy);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;isolation:isolate;transform-style:preserve-3d;transition:transform .25s ease-out;will-change:transform}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.tile:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(7,30,52,.92),rgba(7,30,52,.1) 65%)}
+.tile:hover img{transform:scale(1.08)}
+.tile h3{font-size:clamp(20px,1.8vw,28px);margin-bottom:8px}
+.tile span{font-weight:700;font-size:14px;display:inline-flex;gap:10px;align-items:center}
+.tile span:after{content:"";width:26px;height:1px;background:#fff;transition:width .3s}.tile:hover span:after{width:50px}
+@media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}}
+/* oficinas */
+.offs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;perspective:1100px}
+.of{background:#fff;border:1px solid var(--line);padding:26px;display:flex;flex-direction:column;gap:6px;min-height:200px;transition:transform .25s ease-out,border-color .3s;transform-style:preserve-3d}
+.of:hover{border-color:var(--blue)}
+.of h3{font-size:24px;margin-bottom:6px}.of small{color:var(--mut);font-size:15px;line-height:1.45}
+.of a{margin-top:auto;padding-top:14px;font-weight:700;color:var(--blue-d)}
+.of.hq{background:var(--navy);color:#fff;border-color:var(--navy)}.of.hq small{color:rgba(255,255,255,.75)}.of.hq a{color:#7CC0F2}
+@media(max-width:1000px){.offs{grid-template-columns:1fr 1fr}}
+/* cierre */
+.fin{background:linear-gradient(120deg,var(--blue-d),var(--navy2));color:#fff;margin:0 var(--pad) 90px;padding:clamp(40px,7vw,110px);display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.fin h2{font-size:clamp(38px,6vw,104px);max-width:12ch}
+.fin .btn{background:#fff;color:var(--navy)}.fin .btn:hover{background:var(--paper)}.fin .btn.o{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}.fin .btn.o:hover{background:#fff;color:var(--navy)}
+.fin .row{display:flex;gap:12px;flex-wrap:wrap}
+footer{background:var(--ink);color:rgba(255,255,255,.7);padding:70px var(--pad) 34px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;font-size:14px;line-height:1.8}
+footer img{height:27px;filter:brightness(0) invert(1);margin-bottom:18px}footer h4{color:#fff;margin-bottom:10px;font-size:14px}footer ul{list-style:none}
+.legal{background:var(--ink);color:rgba(255,255,255,.4);padding:0 var(--pad) 32px;font-size:12px}
+@media(max-width:900px){footer{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:900px){.nav .btn{padding:11px 14px;font-size:13px;white-space:nowrap}.nav img{height:21px}}
+
+/* v2: siniestros, colaboradores, contacto */
+.sin{background:var(--navy2);color:#fff;padding:clamp(70px,9vw,130px) var(--pad);display:grid;grid-template-columns:1.1fr 1fr;gap:6vw;align-items:center}
+.sin h2{font-size:clamp(34px,5vw,84px);line-height:1.02;letter-spacing:-.03em;font-weight:700;margin-bottom:22px;font-family:Sora,sans-serif;}
+.sin p{max-width:30em;color:rgba(255,255,255,.85);font-size:clamp(17px,1.4vw,20px)}
+.sin-tel{display:inline-block;margin-top:32px;font-size:clamp(34px,5vw,80px);font-weight:700;letter-spacing:-.04em;line-height:1;border-bottom:2px solid rgba(255,255,255,.5);padding-bottom:6px;transition:border-color .3s}
+.sin-tel:hover{border-color:#fff}
+.sin-s{list-style:none;counter-reset:s;border-top:1px solid rgba(255,255,255,.35)}
+.sin-s li{counter-increment:s;position:relative;padding:24px 0 24px 70px;border-bottom:1px solid rgba(255,255,255,.35)}
+.sin-s li:before{content:"0" counter(s);position:absolute;left:0;top:26px;font-weight:700;opacity:.75}
+.sin-s b{display:block;font-size:clamp(20px,1.8vw,28px);letter-spacing:-.02em;margin-bottom:4px}
+.sin-s span{color:rgba(255,255,255,.8)}
+.col{display:grid;grid-template-columns:1fr 1.05fr;gap:6vw;align-items:center;padding:clamp(70px,9vw,130px) var(--pad);background:var(--paper);color:var(--ink)}
+.col figure{overflow:hidden;aspect-ratio:4/3;background:#cdd7e2}
+.col figure img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.col:hover figure img{transform:scale(1.04)}
+.col h2{font-size:clamp(34px,5vw,84px);line-height:1.02;letter-spacing:-.03em;font-weight:700;margin-bottom:22px;font-family:Sora,sans-serif;}
+.col p{max-width:32em;font-size:18px;opacity:.8;margin-bottom:22px}
+.col ul{list-style:none;margin-bottom:32px;display:grid;gap:10px;font-weight:600}
+.col li:before{content:"";display:inline-block;width:22px;height:1px;background:currentColor;vertical-align:middle;margin-right:12px}
+.fin{display:grid;grid-template-columns:1.05fr 1fr;gap:6vw;align-items:start;align-items:start;}
+.fin h2{font-size:clamp(36px,5.4vw,96px);max-width:11ch;font-family:Sora,sans-serif;}
+.fin-p{margin:22px 0 30px;font-size:19px;opacity:.9;max-width:26em}
+.fin-c{list-style:none;display:grid;gap:16px}.fin-c small{display:block;opacity:.7;font-size:13px}.fin-c a{font-size:20px;font-weight:600}
+.frm{display:grid;gap:22px}
+.frm label{display:grid;gap:6px;font-size:14px;font-weight:600;color:rgba(255,255,255,.88)}
+.frm input,.frm select{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.55);color:#fff;font-family:inherit;font-size:18px;font-weight:500;padding:10px 0;outline:0;border-radius:0;width:100%}
+.frm select option{color:#0B2B47}
+.frm input:focus,.frm select:focus{border-color:#fff}
+.frm .chk{display:flex;gap:10px;align-items:center;font-weight:400;font-size:14px}.frm .chk input{width:18px;height:18px;flex:0 0 18px}
+.frm .btn{justify-self:start;background:#fff;color:#0B2B47;border:0;cursor:pointer;font-family:inherit}.frm .btn:hover{background:#071E34;color:#fff}
+.frm .done{display:none;font-size:14px;color:rgba(255,255,255,.9)}.frm.ok .done{display:block}
+@media(max-width:900px){.sin,.col,.fin{grid-template-columns:1fr}}
+.sin>*,.col>*,.fin>*,.bc,.of{min-width:0}.sin-tel,.fin-c a,.of a,.bc b{overflow-wrap:anywhere}
+@media(max-width:600px){.offs{grid-template-columns:1fr!important}.sin-tel{font-size:clamp(30px,9vw,44px)}}
+@media(max-width:900px){.bc.reg{grid-column:1/-1!important}}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <a href="#"><img src="assets/img/logo-cascudo.png" alt="Cascudo Correduría de Seguros" width="208" height="27"></a>
+  <ul><li><a href="#seguros">Seguros</a></li><li><a href="#compara">Cómo comparamos</a></li><li><a href="#siniestros">Siniestros</a></li><li><a href="#colaboradores">Colaboradores</a></li><li><a href="#oficinas">Oficinas</a></li><li><a href="#cierre">Contacto</a></li></ul>
+  <div class="r"><a href="tel:+34981325961">981 325 961</a><a class="btn" href="#cierre">Pedir presupuesto</a></div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="l">
+    <h1>¿Qué quieres proteger?</h1>
+    <p class="sub">Somos tu correduría de seguros independiente. Elige y comparamos más de 80 aseguradoras para encontrar la mejor opción para ti.</p>
+    <ul class="sel" id="sel"></ul>
+  </div>
+  <div class="r">
+    <div class="pic" id="pic"></div>
+    <div class="cap"><div class="t" id="capt"><h3 id="ct"></h3><p id="cp"></p></div><a class="btn" id="cl" href="#cierre">Pedir presupuesto <span class="ar">→</span></a></div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Una correduría con 31 años de experiencia.</h2>
+  <div class="bento" id="bento">
+    <div class="bc ph"><img src="assets/img/asesora.webp" alt="" loading="lazy"><div><h3>Atención personal, en siete oficinas</h3><p>Te asesoramos en persona, por teléfono, por WhatsApp y online. Siempre con un equipo que te conoce.</p></div></div>
+    <div class="bc a dk"><b><em data-to="31">31</em></b><span>años de experiencia como correduría</span></div>
+    <div class="bc b"><b>+<em data-to="80">80</em></b><span>aseguradoras entre las que comparar</span></div>
+    <div class="bc c"><b><em data-to="7">7</em></b><span>oficinas en Galicia y clientes en toda España</span></div>
+    <div class="bc d dk"><b><em data-to="24">24</em>h</b><span>asistencia ante un siniestro</span></div>
+    <div class="bc reg" style="grid-column:span 12"><b>Registrada en la DGSFP</b><span>Correduría de seguros con clave J2354. Independiente: no pertenecemos a ninguna aseguradora.</span></div>
+  </div>
+</section>
+
+<section class="cv" id="compara">
+  <div class="cv-pin">
+    <h2>Comparamos por ti.</h2>
+    <div class="stage" id="stage"><div class="core">Cascudo</div></div>
+    <div class="caps"><p>Tu necesidad.</p><p>Más de 80 aseguradoras, comparadas.</p><p>Una recomendación clara para ti.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="seguros">
+  <h2>Todos nuestros seguros.</h2>
+  <div class="tabs"><button class="tab on" data-t="p">Particulares</button><button class="tab" data-t="e">Empresas</button></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="sin" id="siniestros">
+  <div class="sin-t">
+    <h2>¿Has tenido un siniestro? Estamos contigo.</h2>
+    <p>Nuestro departamento de siniestros te guía y gestiona el parte con la aseguradora. Asistencia las 24 horas.</p>
+    <a class="sin-tel" href="tel:+34981325961">981 325 961</a>
+  </div>
+  <ol class="sin-s">
+    <li><b>Llámanos</b><span>A tu oficina o a nuestro teléfono de asistencia, a cualquier hora.</span></li>
+    <li><b>Nos ocupamos del parte</b><span>Lo gestionamos con la aseguradora para que tú no pierdas tiempo.</span></li>
+    <li><b>Te acompañamos hasta el final</b><span>Seguimiento del siniestro hasta que queda resuelto.</span></li>
+  </ol>
+</section>
+<section class="col" id="colaboradores">
+  <figure><img src="assets/img/colegas.webp" alt="Equipo celebrando un acuerdo" loading="lazy"></figure>
+  <div>
+    <h2>Colabora con Cascudo.</h2>
+    <p>Si tienes una inmobiliaria, asesoría, clínica u otro negocio con clientes que necesitan seguros, puedes colaborar con nosotros y contar con el respaldo y la formación de una correduría registrada.</p>
+    <ul><li>Respaldo de una correduría registrada en la DGSFP</li><li>Formación para tu equipo</li><li>Más de 80 aseguradoras para tus clientes</li></ul>
+    <a class="btn" href="#">Quiero ser colaborador <span class="ar">→</span></a>
+  </div>
+</section>
+<section class="sec" id="oficinas">
+  <h2>Siete oficinas en Galicia.</h2>
+  <div class="offs">
+    <div class="of hq"><h3>Narón</h3><small>Sede central<br>Av. do Mar 148, 2ª Polígono · 15570</small><a href="tel:+34981325961">981 325 961</a></div>
+    <div class="of"><h3>A Coruña</h3><small>C/ Novoa Santos 4, bajo · 15006</small><a href="tel:+34981287205">981 287 205</a></div>
+    <div class="of"><h3>Vigo</h3><small>C/ Rosalía de Castro 41 bis · 36201</small><a href="tel:+34986267829">986 267 829</a></div>
+    <div class="of"><h3>Nigrán</h3><small>C/ Rosalía de Castro 11 · 36350</small><a href="tel:+34986367945">986 367 945</a></div>
+    <div class="of"><h3>Pontevedra</h3><small>C/ Castelao 9 · 36001</small><a href="tel:+34986850922">986 850 922</a></div>
+    <div class="of"><h3>Ribadumia</h3><small>Avda. de Bouza Martín 23 · 36636</small><a href="tel:+34986718470">986 718 470</a></div>
+    <div class="of"><h3>Sanxenxo</h3><small>C/ Madrid 24 · 36960</small><a href="tel:+34986487582">986 487 582</a></div>
+    <div class="of" style="background:var(--tint,#E7EFF7)"><h3>Online</h3><small>Atendemos a toda España por teléfono, WhatsApp y email.</small><a href="mailto:cascudo@cascudo.es">cascudo@cascudo.es</a></div>
+  </div>
+</section>
+
+<section class="fin" id="cierre">
+  <div class="fin-t">
+    <h2>Hablemos de tu seguro.</h2>
+    <p class="fin-p">Cuéntanos qué necesitas y te llamamos. Sin compromiso.</p>
+    <ul class="fin-c">
+      <li><small>Teléfono</small><a href="tel:+34981325961">981 325 961</a></li>
+      <li><small>Email</small><a href="mailto:cascudo@cascudo.es">cascudo@cascudo.es</a></li>
+      <li><small>Oficinas</small><a href="#oficinas">Narón · A Coruña · Vigo · Pontevedra · Nigrán · Ribadumia · Sanxenxo</a></li>
+    </ul>
+  </div>
+  <form class="frm" onsubmit="event.preventDefault();this.classList.add('ok')">
+    <label>Nombre<input name="n" required autocomplete="name"></label>
+    <label>Teléfono<input name="t" type="tel" required autocomplete="tel"></label>
+    <label>¿Qué quieres asegurar?<select name="q"><option>Coche</option><option>Hogar</option><option>Salud</option><option>Vida</option><option>Mascota</option><option>Mi negocio / empresa</option><option>Otro</option></select></label>
+    <label class="chk"><input type="checkbox" required> Acepto la política de privacidad</label>
+    <button class="btn" type="submit">Quiero que me llamen <span class="ar">→</span></button>
+    <p class="done">¡Gracias! Te llamaremos en breve. (En la web real, este formulario se conecta con WPForms.)</p>
+  </form>
+</section>
+
+<footer>
+  <div><img src="assets/img/logo-cascudo.png" alt="Cascudo" width="208" height="27"><p>Correduría de seguros independiente con sede en Narón y oficinas en toda Galicia. Atendemos a clientes de toda España.</p></div>
+  <div><h4>Particulares</h4><ul><li>Coche y moto</li><li>Hogar</li><li>Salud</li><li>Vida</li></ul></div>
+  <div><h4>Empresas</h4><ul><li>Comercios</li><li>Responsabilidad civil</li><li>Colectivos</li><li>Flotas</li></ul></div>
+  <div><h4>Contacto</h4><ul><li>981 325 961</li><li>cascudo@cascudo.es</li></ul></div>
+</footer>
+<div class="legal">Cascudo Correduría de Seguros · Inscrita en la DGSFP con clave J2354 · Maqueta de propuesta de diseño: contenidos reales de cascudo.es.</div>
+
+<script src="assets/js/gsap.min.js"></script>
+<script src="assets/js/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,desk=matchMedia("(min-width:901px)").matches,hov=matchMedia("(hover:hover)").matches;
+// ---- hero selector
+var S=[["Mi coche","coche","Seguro de coche","Terceros, ampliado o todo riesgo, con asistencia en carretera."],
+["Mi hogar","hogar","Seguro de hogar","Protege tu vivienda y todo lo que hay dentro."],
+["Mi salud","salud","Seguro de salud","Los mejores cuadros médicos y hospitales."],
+["Mi familia","familia","Seguro de vida","Tranquilidad y protección para los tuyos."],
+["Mi mascota","mascotas","Seguro de mascotas","Responsabilidad civil y gastos veterinarios."],
+["Mi negocio","comercios","Seguro de comercios","Local, mercancías y responsabilidad civil."],
+["Mi flota","flota","Seguros de flotas","Una póliza y un único interlocutor para tus vehículos."]];
+var sel=document.getElementById("sel"),pic=document.getElementById("pic"),cur=-1,z=1,timer,auto=!reduce,DUR=5200;
+sel.innerHTML=S.map(function(s,i){return'<li data-i="'+i+'"><span>'+s[0]+'</span><span class="n">0'+(i+1)+'</span></li>'}).join("");
+pic.innerHTML=S.map(function(s){return'<img src="assets/img/'+s[1]+'.webp" alt="">'}).join("");
+var lis=[].slice.call(sel.children),ims=[].slice.call(pic.children),ct=document.getElementById("ct"),cp=document.getElementById("cp"),capt=document.getElementById("capt");
+sel.style.setProperty("--dur",DUR+"ms");
+function go(i){if(i===cur)return;var prev=cur;cur=i;
+  lis.forEach(function(l,k){l.classList.remove("on");if(k===i){void l.offsetWidth;l.classList.add("on")}});
+  var im=ims[i];im.style.zIndex=++z;im.classList.add("on");
+  ims.forEach(function(o,k){if(k!==i&&o.classList.contains("on")){setTimeout(function(){if(cur!==k){o.classList.remove("on");o.style.animation="none"}},1100)}});
+  capt.classList.add("sw");setTimeout(function(){ct.textContent=S[i][2];cp.textContent=S[i][3];capt.classList.remove("sw")},260)}
+function run(){clearInterval(timer);if(auto)timer=setInterval(function(){go((cur+1)%S.length)},DUR)}
+lis.forEach(function(l){l.addEventListener("click",function(){auto=false;clearInterval(timer);lis.forEach(function(x){x.style.setProperty("--dur","0s")});go(+l.dataset.i)});l.addEventListener("mouseenter",function(){if(hov){auto=false;clearInterval(timer);lis.forEach(function(x){x.style.setProperty("--dur","0s")});go(+l.dataset.i)}})});
+go(0);ct.textContent=S[0][2];cp.textContent=S[0][3];run();
+document.addEventListener("visibilitychange",function(){if(document.hidden)clearInterval(timer);else run()});
+// ---- cabecera
+var nav=document.getElementById("nav"),hero=document.getElementById("hero");function sc(){nav.classList.toggle("on",scrollY>hero.offsetHeight-90)}sc();addEventListener("scroll",sc,{passive:true});
+// ---- spotlight bento
+document.querySelectorAll(".bc").forEach(function(c){c.addEventListener("mousemove",function(e){var r=c.getBoundingClientRect();c.style.setProperty("--mx",(e.clientX-r.left)+"px");c.style.setProperty("--my",(e.clientY-r.top)+"px")})});
+// ---- tiles
+var P=[["Coche","coche"],["Hogar","hogar"],["Salud","salud"],["Vida","vida"],["Mascotas","mascotas"],["Moto","moto"],["Viaje","viaje"],["Patinetes","patinete"]],
+E=[["Comercios","comercios"],["Responsabilidad civil","rc"],["Colectivos y accidentes","colectivo"],["Flotas","flota"],["Salud para empresas","saludemp"],["Empresarios","empresarios"],["Caución y crédito","credito"],["Profesionales","profesional"]];
+var grid=document.getElementById("grid");
+function tiles(l){grid.innerHTML=l.map(function(t){return'<a class="tile" href="#"><img src="assets/img/'+t[1]+'.webp" alt="" loading="lazy"><h3>Seguro de '+t[0].toLowerCase()+'</h3><span>Ver seguro</span></a>'}).join("");if(hov&&!reduce)tilt(".tile",7)}
+function tilt(sel,mx){document.querySelectorAll(sel).forEach(function(t){t.addEventListener("mousemove",function(e){var r=t.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.transform="rotateY("+(x*mx*2)+"deg) rotateX("+(-y*mx*2)+"deg) translateZ(14px)"});t.addEventListener("mouseleave",function(){t.style.transform=""})})}
+tiles(P);
+document.querySelectorAll(".tab").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.toggle("on",x===b)});tiles(b.dataset.t==="p"?P:E);if(window.gsap&&!reduce)gsap.from(".tile",{opacity:0,y:30,stagger:.06,duration:.6,ease:"power3.out"})})});
+if(hov&&!reduce)tilt(".of",4);
+// ---- convergencia
+var L=["adeslas","allianz","axa","dkv","reale","zurich","occident","sanitas","asisa","arag","murimar"],stage=document.getElementById("stage"),cvEl=document.querySelector(".cv"),fl=[];
+L.forEach(function(k){var d=document.createElement("div");d.className="fl";d.innerHTML='<img src="assets/img/logo-'+k+'.png" alt="'+k+'" loading="lazy">';stage.appendChild(d);fl.push(d)});
+function count(el){var to=+el.dataset.to,o={v:0};gsap.to(o,{v:to,duration:2,ease:"power2.out",onUpdate:function(){el.textContent=Math.round(o.v)}})}
+if(window.gsap&&window.ScrollTrigger&&!reduce){
+  document.documentElement.classList.add("js");gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll(".bento [data-to]").forEach(function(el){el.textContent=0;ScrollTrigger.create({trigger:"#bento",start:"top 80%",once:true,onEnter:function(){count(el)}})});
+  gsap.from(".bento .bc",{opacity:0,y:50,stagger:.08,duration:.9,ease:"power3.out",scrollTrigger:{trigger:"#bento",start:"top 85%"}});
+  gsap.utils.toArray(".sec h2,.fin h2").forEach(function(e){gsap.from(e,{y:56,opacity:0,duration:1,ease:"power3.out",scrollTrigger:{trigger:e,start:"top 88%"}})});
+  gsap.from(".of",{opacity:0,y:40,stagger:.06,duration:.8,ease:"power3.out",scrollTrigger:{trigger:".offs",start:"top 85%"}});
+  if(desk){
+    var n=fl.length,R=Math.min(innerWidth,1100)/2*.95,Ry=Math.min(innerHeight*.64,560)/2*.95;
+    fl.forEach(function(d,i){var a=i/n*Math.PI*2-Math.PI/2;gsap.set(d,{x:Math.cos(a)*R*(i%2?1:.78),y:Math.sin(a)*Ry*(i%2?1:.8),rotation:(i%2?-1:1)*6})});
+    var cp=gsap.utils.toArray(".caps p");gsap.set(cp.slice(1),{autoAlpha:0,y:30});
+    var tl=gsap.timeline({defaults:{ease:"none"},scrollTrigger:{trigger:".cv",start:"top top",end:"+=260%",pin:".cv-pin",scrub:.7}});
+    tl.to(fl,{x:0,y:0,rotation:0,duration:2,stagger:{each:.05,from:"random"}},.5);
+    tl.to(".core",{scale:1.25,duration:1.6},1.4);
+    tl.to(fl,{opacity:0,scale:.3,duration:.7},2.2);
+    tl.to(cp[0],{autoAlpha:0,y:-30,duration:.5},.9).to(cp[1],{autoAlpha:1,y:0,duration:.5},1.0);
+    tl.to(cp[1],{autoAlpha:0,y:-30,duration:.5},2.5).to(cp[2],{autoAlpha:1,y:0,duration:.5},2.6);
+    tl.to({},{duration:.6});
+  }else{cvEl.classList.add("stat")}
+}else{cvEl.classList.add("stat")}
+})();
+</script>
+<script>
+(function(){if(!(window.gsap&&window.ScrollTrigger)||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+gsap.utils.toArray(".sin h2,.col h2").forEach(function(e){gsap.from(e,{y:56,opacity:0,duration:1,ease:"power3.out",scrollTrigger:{trigger:e,start:"top 88%"}})});
+gsap.from(".col figure",{clipPath:"inset(0 0 100% 0)",duration:1.3,ease:"power3.inOut",scrollTrigger:{trigger:".col",start:"top 72%"}});
+gsap.from(".sin-s li",{opacity:0,y:30,stagger:.14,duration:.8,ease:"power3.out",scrollTrigger:{trigger:".sin-s",start:"top 85%"}});})();
+</script>
+</body>
+</html>

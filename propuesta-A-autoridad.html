@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cascudo · Propuesta A · Autoridad</title>
+<style>
+@font-face{font-family:Archivo;src:url(assets/fonts/archivo.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+:root{--ink:#05172A;--navy:#0B2B47;--navy2:#123C63;--blue:#2B93DD;--blue-d:#066AAB;--paper:#F3F5F8;--line:rgba(255,255,255,.16);--pad:clamp(20px,5vw,84px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{font-family:Archivo,system-ui,sans-serif;background:var(--ink);color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.w{font-stretch:125%}
+/* cabecera */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);transition:background .4s,padding .4s,border-color .4s;border-bottom:1px solid transparent}
+.nav.on{background:rgba(5,23,42,.92);backdrop-filter:blur(10px);padding-block:14px;border-color:var(--line)}
+.nav img{height:28px;filter:brightness(0) invert(1)}
+.nav ul{display:flex;gap:34px;list-style:none;font-size:14px;font-weight:500}
+.nav ul a{position:relative;padding:6px 0;opacity:.85}
+.nav ul a:after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:#fff;transform:scaleX(0);transform-origin:right;transition:transform .35s}
+.nav ul a:hover{opacity:1}.nav ul a:hover:after{transform:scaleX(1);transform-origin:left}
+.nav .r{display:flex;align-items:center;gap:22px;font-size:14px}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--blue);color:#fff;padding:15px 26px;font-weight:600;font-size:15px;border-radius:2px;transition:background .3s,transform .3s;position:relative;overflow:hidden;will-change:transform}
+.btn:hover{background:var(--blue-d)}
+.btn.line{background:transparent;border:1px solid rgba(255,255,255,.45)}
+.btn.line:hover{background:#fff;color:var(--navy)}
+.btn .ar{transition:transform .3s}.btn:hover .ar{transform:translateX(5px)}
+@media(max-width:900px){.nav ul,.nav .r>a:first-child{display:none}}
+/* hero */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:140px var(--pad) 48px;overflow:hidden;isolation:isolate}
+.hero .bg{position:absolute;inset:-4%;z-index:-2}
+.hero .bg img{width:100%;height:100%;object-fit:cover;object-position:60% 30%;animation:zoom 22s ease-out forwards}
+@keyframes zoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+.hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,23,42,.96) 0%,rgba(5,23,42,.82) 45%,rgba(5,23,42,.35) 100%),linear-gradient(0deg,rgba(5,23,42,.9) 0%,transparent 40%)}
+h1{font-size:clamp(40px,7.2vw,118px);font-weight:700;font-stretch:112%;line-height:.98;letter-spacing:-.025em;max-width:15ch}
+h1 .ln{display:block;overflow:hidden;padding-bottom:.08em}
+h1 .ln span{display:block;transform:translateY(110%);animation:up 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+h1 .ln:nth-child(2) span{animation-delay:.12s}h1 .ln:nth-child(3) span{animation-delay:.24s}
+@keyframes up{to{transform:none}}
+.hero p.lead{max-width:560px;font-size:clamp(17px,1.5vw,21px);line-height:1.55;color:rgba(255,255,255,.82);margin:34px 0 38px;opacity:0;animation:fade 1s .7s forwards}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fade 1s .9s forwards}
+@keyframes fade{to{opacity:1}}
+.hero .base{display:flex;justify-content:space-between;align-items:flex-end;margin-top:72px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:rgba(255,255,255,.65);gap:20px;flex-wrap:wrap}
+.scroll{display:flex;align-items:center;gap:14px}
+.scroll i{width:1px;height:46px;background:rgba(255,255,255,.3);position:relative;overflow:hidden}
+.scroll i:after{content:"";position:absolute;left:0;top:-50%;width:1px;height:50%;background:#fff;animation:drip 2s infinite}
+@keyframes drip{to{top:100%}}
+/* historia fijada */
+.story{background:var(--navy);position:relative}
+.story-pin{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:4vw;padding:0 var(--pad);position:relative;overflow:hidden}
+.big{display:flex;align-items:baseline;gap:2vw;line-height:.8;will-change:transform}
+.big .n{font-size:clamp(130px,19vw,330px);font-weight:800;font-stretch:125%;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.9)}
+.big .u{font-size:clamp(28px,4vw,64px);font-weight:600;font-stretch:112%}
+.steps{display:grid}
+.st{grid-area:1/1;align-self:center}
+.st h2{font-size:clamp(34px,4.6vw,76px);font-weight:700;font-stretch:112%;line-height:1;letter-spacing:-.02em;margin-bottom:24px}
+.st p{font-size:clamp(17px,1.5vw,22px);line-height:1.55;color:rgba(255,255,255,.78);max-width:34em}
+.prog{position:absolute;left:var(--pad);right:var(--pad);bottom:44px;height:1px;background:var(--line)}
+.prog i{position:absolute;left:0;top:-1px;height:3px;width:100%;background:var(--blue);transform:scaleX(0);transform-origin:left}
+html:not(.js) .st{grid-area:auto;margin-bottom:46px}
+@media(max-width:900px){.story-pin{grid-template-columns:1fr;padding-block:90px 110px;align-content:center}.big .n{-webkit-text-stroke-width:1.5px}}
+/* ramos horizontal */
+.hz{background:var(--ink);position:relative;overflow:hidden}
+.hz-h{padding:110px var(--pad) 0;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.hz-h h2{font-size:clamp(34px,5vw,84px);font-weight:700;font-stretch:112%;letter-spacing:-.02em;line-height:1;max-width:14ch}
+.hz-h p{max-width:380px;color:rgba(255,255,255,.7);line-height:1.6}
+.hz-run{height:100vh;display:flex;align-items:center}
+.track{display:flex;gap:26px;padding:0 var(--pad);will-change:transform}
+html:not(.js) .hz-run,.nojs-hz .hz-run{height:auto;padding:60px 0;overflow-x:auto}
+.card{position:relative;flex:0 0 clamp(300px,30vw,460px);height:min(68vh,560px);overflow:hidden;background:var(--navy);display:flex;flex-direction:column;justify-content:flex-end;padding:30px;isolation:isolate;cursor:pointer}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.1s cubic-bezier(.2,.8,.2,1),filter .6s;filter:saturate(.8)}
+.card:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(5,23,42,.95) 0%,rgba(5,23,42,.45) 50%,rgba(5,23,42,.1) 100%)}
+.card:hover img{transform:scale(1.07);filter:saturate(1.05)}
+.card .no{position:absolute;top:26px;left:30px;font-size:14px;font-weight:600;font-stretch:125%;letter-spacing:.06em;color:rgba(255,255,255,.75)}
+.card .tp{position:absolute;top:26px;right:30px;font-size:13px;color:rgba(255,255,255,.75)}
+.card h3{font-size:clamp(28px,2.6vw,42px);font-weight:700;font-stretch:112%;line-height:1.05;margin-bottom:12px}
+.card p{font-size:15px;line-height:1.5;color:rgba(255,255,255,.82);max-height:0;opacity:0;overflow:hidden;transition:max-height .6s,opacity .6s,margin .6s}
+.card:hover p,.card:focus-within p{max-height:110px;opacity:1;margin-bottom:14px}
+.card .go{display:inline-flex;gap:10px;font-weight:600;font-size:15px;align-items:center}
+.card .go:after{content:"";width:34px;height:1px;background:#fff;transition:width .4s}
+.card:hover .go:after{width:64px}
+.hz-bar{position:absolute;left:var(--pad);right:var(--pad);bottom:34px;display:flex;align-items:center;gap:18px;font-size:13px;font-stretch:125%;font-weight:600;color:rgba(255,255,255,.7)}
+.hz-bar .l{flex:1;height:1px;background:var(--line);position:relative}
+.hz-bar .l i{position:absolute;left:0;top:-1px;height:3px;width:100%;background:var(--blue);transform:scaleX(0);transform-origin:left}
+#cur{position:fixed;left:0;top:0;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:#fff;color:var(--navy);display:grid;place-items:center;font-weight:700;font-size:14px;z-index:60;pointer-events:none;transform:scale(0);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+#cur.on{transform:scale(1)}
+@media(max-width:900px){.hz-run{height:auto;padding:50px 0;overflow-x:auto}.card{height:62vh}.hz-bar{display:none}#cur{display:none}}
+/* aseguradoras */
+.cias{background:var(--paper);color:var(--navy);padding:100px 0 110px;overflow:hidden}
+.cias h2{padding:0 var(--pad);font-size:clamp(30px,4vw,62px);font-weight:700;font-stretch:112%;letter-spacing:-.02em;line-height:1.02;max-width:20ch;margin-bottom:60px}
+.mq{display:flex;width:max-content;animation:mq 42s linear infinite;padding-block:6px}
+.mq.rv{animation-direction:reverse;animation-duration:55s;margin-top:20px}
+.mq div{display:flex;align-items:center;justify-content:center;width:230px;height:92px;margin-right:20px;background:#fff;border:1px solid #DCE3EB}
+.mq img{max-width:150px;max-height:48px;object-fit:contain;filter:grayscale(1);opacity:.7;transition:.4s}
+.mq div:hover img{filter:none;opacity:1}
+@keyframes mq{to{transform:translateX(-50%)}}
+.cias:hover .mq{animation-play-state:paused}
+/* cifras */
+.nums{background:var(--navy2);padding:120px var(--pad)}
+.nums .g{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.nums .c{padding:34px 26px 10px 0;border-right:1px solid var(--line);margin-right:26px}
+.nums .c:last-child{border:0;margin:0}
+.nums b{display:block;font-size:clamp(54px,8vw,150px);font-weight:800;font-stretch:125%;letter-spacing:-.04em;line-height:1}
+.nums b em{font-style:normal;color:var(--blue)}
+.nums span{display:block;margin-top:14px;font-size:clamp(14px,1.2vw,18px);color:rgba(255,255,255,.75);max-width:20ch;line-height:1.4}
+@media(max-width:900px){.nums .g{grid-template-columns:1fr 1fr}.nums .c{border:0;border-bottom:1px solid var(--line);margin:0;padding:26px 0}}
+/* oficinas */
+.of{background:var(--ink);padding:120px var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center}
+.of h2{font-size:clamp(34px,4.6vw,76px);font-weight:700;font-stretch:112%;letter-spacing:-.02em;line-height:1;margin-bottom:22px}
+.of .lead{color:rgba(255,255,255,.72);line-height:1.6;max-width:30em;margin-bottom:34px}
+.of ul{list-style:none;border-top:1px solid var(--line)}
+.of li{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:17px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:padding .35s,background .35s}
+.of li:hover,.of li.on{padding-left:16px;background:rgba(43,147,221,.12)}
+.of li b{font-size:18px;font-weight:600}.of li small{grid-column:1;color:rgba(255,255,255,.62);font-size:14px}
+.of li a{grid-row:1/3;grid-column:2;align-self:center;color:var(--blue);font-weight:600;font-size:15px}
+.map{position:relative;aspect-ratio:1/1.1;border:1px solid var(--line);background:radial-gradient(circle at 50% 40%,#0E3354,#071E34 70%);overflow:hidden}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.pt{fill:#fff}.pt.s{fill:var(--blue)}
+.ring{fill:none;stroke:var(--blue);stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:ping 2.8s infinite}
+@keyframes ping{from{transform:scale(.4);opacity:.9}to{transform:scale(3.2);opacity:0}}
+.lnk{stroke:rgba(43,147,221,.7);stroke-width:1.2;fill:none;stroke-dasharray:6 6;animation:dash 8s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-120}}
+.lbl{font-size:13px;fill:#fff;font-family:Archivo;font-weight:600}
+.pt-g{cursor:pointer}.pt-g.on .pt{fill:var(--blue)}.pt-g.on .lbl{fill:#fff}
+.pt-g .lbl{opacity:.75}.pt-g.on .lbl{opacity:1}
+@media(max-width:900px){.of{grid-template-columns:1fr}}
+/* cierre */
+.fin{background:var(--blue-d);padding:130px var(--pad);text-align:left;position:relative;overflow:hidden}
+.fin h2{font-size:clamp(44px,9vw,170px);font-weight:800;font-stretch:125%;letter-spacing:-.04em;line-height:.92;max-width:11ch}
+.fin .row{display:flex;gap:16px;flex-wrap:wrap;margin-top:56px}
+.fin .btn{background:#fff;color:var(--navy)}.fin .btn:hover{background:var(--ink);color:#fff}
+.fin .btn.line{background:transparent;color:#fff}
+footer{background:var(--ink);padding:70px var(--pad) 36px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;font-size:14px;color:rgba(255,255,255,.65);line-height:1.8}
+footer img{height:28px;filter:brightness(0) invert(1);margin-bottom:20px}
+footer h4{color:#fff;font-size:14px;margin-bottom:12px}
+footer ul{list-style:none}
+.legal{background:var(--ink);padding:0 var(--pad) 36px;font-size:12px;color:rgba(255,255,255,.45)}
+@media(max-width:900px){footer{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}h1 .ln span{transform:none}.hero p.lead,.hero .cta{opacity:1}}
+@media(max-width:900px){.nav .btn{padding:11px 14px;font-size:13px;white-space:nowrap}.nav img{height:21px}}
+
+/* v2: siniestros, colaboradores, contacto */
+.sin{background:var(--blue-d);color:#fff;padding:clamp(70px,9vw,130px) var(--pad);display:grid;grid-template-columns:1.1fr 1fr;gap:6vw;align-items:center}
+.sin h2{font-size:clamp(34px,5vw,84px);line-height:1.02;letter-spacing:-.03em;font-weight:700;margin-bottom:22px;font-stretch:112%;}
+.sin p{max-width:30em;color:rgba(255,255,255,.85);font-size:clamp(17px,1.4vw,20px)}
+.sin-tel{display:inline-block;margin-top:32px;font-size:clamp(34px,5vw,80px);font-weight:700;letter-spacing:-.04em;line-height:1;border-bottom:2px solid rgba(255,255,255,.5);padding-bottom:6px;transition:border-color .3s}
+.sin-tel:hover{border-color:#fff}
+.sin-s{list-style:none;counter-reset:s;border-top:1px solid rgba(255,255,255,.35)}
+.sin-s li{counter-increment:s;position:relative;padding:24px 0 24px 70px;border-bottom:1px solid rgba(255,255,255,.35)}
+.sin-s li:before{content:"0" counter(s);position:absolute;left:0;top:26px;font-weight:700;opacity:.75}
+.sin-s b{display:block;font-size:clamp(20px,1.8vw,28px);letter-spacing:-.02em;margin-bottom:4px}
+.sin-s span{color:rgba(255,255,255,.8)}
+.col{display:grid;grid-template-columns:1fr 1.05fr;gap:6vw;align-items:center;padding:clamp(70px,9vw,130px) var(--pad);background:var(--paper);color:var(--navy)}
+.col figure{overflow:hidden;aspect-ratio:4/3;background:#cdd7e2}
+.col figure img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.col:hover figure img{transform:scale(1.04)}
+.col h2{font-size:clamp(34px,5vw,84px);line-height:1.02;letter-spacing:-.03em;font-weight:700;margin-bottom:22px;font-stretch:112%;}
+.col p{max-width:32em;font-size:18px;opacity:.8;margin-bottom:22px}
+.col ul{list-style:none;margin-bottom:32px;display:grid;gap:10px;font-weight:600}
+.col li:before{content:"";display:inline-block;width:22px;height:1px;background:currentColor;vertical-align:middle;margin-right:12px}
+.fin{display:grid;grid-template-columns:1.05fr 1fr;gap:6vw;align-items:start;}
+.fin h2{font-size:clamp(36px,5.4vw,96px);max-width:11ch;font-stretch:112%;}
+.fin-p{margin:22px 0 30px;font-size:19px;opacity:.9;max-width:26em}
+.fin-c{list-style:none;display:grid;gap:16px}.fin-c small{display:block;opacity:.7;font-size:13px}.fin-c a{font-size:20px;font-weight:600}
+.frm{display:grid;gap:22px}
+.frm label{display:grid;gap:6px;font-size:14px;font-weight:600;color:rgba(255,255,255,.88)}
+.frm input,.frm select{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.55);color:#fff;font-family:inherit;font-size:18px;font-weight:500;padding:10px 0;outline:0;border-radius:0;width:100%}
+.frm select option{color:#0B2B47}
+.frm input:focus,.frm select:focus{border-color:#fff}
+.frm .chk{display:flex;gap:10px;align-items:center;font-weight:400;font-size:14px}.frm .chk input{width:18px;height:18px;flex:0 0 18px}
+.frm .btn{justify-self:start;background:#fff;color:#0B2B47;border:0;cursor:pointer;font-family:inherit}.frm .btn:hover{background:#071E34;color:#fff}
+.frm .done{display:none;font-size:14px;color:rgba(255,255,255,.9)}.frm.ok .done{display:block}
+@media(max-width:900px){.sin,.col,.fin{grid-template-columns:1fr}}
+.sin>*,.col>*,.fin>*,.bc,.of{min-width:0}.sin-tel,.fin-c a,.of a,.bc b{overflow-wrap:anywhere}
+@media(max-width:600px){.offs{grid-template-columns:1fr!important}.sin-tel{font-size:clamp(30px,9vw,44px)}}
+@media(max-width:900px){.bc.reg{grid-column:1/-1!important}}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <a href="#"><img src="assets/img/logo-cascudo.png" alt="Cascudo Correduría de Seguros" width="231" height="30"></a>
+  <ul><li><a href="#ramos">Seguros</a></li><li><a href="#siniestros">Siniestros</a></li><li><a href="#colaboradores">Colaboradores</a></li><li><a href="#oficinas">Oficinas</a></li><li><a href="#cierre">Contacto</a></li></ul>
+  <div class="r"><a href="tel:+34981325961">981 325 961</a><a class="btn" href="#cierre">Pedir presupuesto</a></div>
+</header>
+
+<section class="hero">
+  <div class="bg"><img src="assets/img/reunion.webp" alt=""></div>
+  <h1><span class="ln"><span>Correduría de</span></span><span class="ln"><span>seguros que</span></span><span class="ln"><span>trabaja para ti.</span></span></h1>
+  <p class="lead">Somos independientes: comparamos más de 80 aseguradoras para encontrar la cobertura adecuada al mejor precio, y te acompañamos cuando más lo necesitas.</p>
+  <div class="cta"><a class="btn" href="#cierre">Pedir presupuesto <span class="ar">→</span></a><a class="btn line" href="tel:+34981325961">Llamar al 981 325 961</a></div>
+  <div class="base"><span>Correduría de seguros inscrita en la DGSFP · J2354</span><span class="scroll"><i></i>Desliza</span></div>
+</section>
+
+<section class="story" id="story">
+  <div class="story-pin">
+    <div class="big"><span class="n" id="n31" data-to="31">31</span><span class="u">años</span></div>
+    <div class="steps">
+      <div class="st"><h2>Independientes.</h2><p>No trabajamos para una aseguradora: trabajamos para ti. Nuestro único compromiso es tu protección.</p></div>
+      <div class="st"><h2>Comparamos.</h2><p>Más de 80 aseguradoras a nuestro alcance para elegir la mejor cobertura al mejor precio, sin letra pequeña.</p></div>
+      <div class="st"><h2>Te acompañamos.</h2><p>Gestionamos tus siniestros y estamos a tu lado con asistencia 24 horas. Un equipo cercano en siete oficinas de Galicia.</p></div>
+    </div>
+    <div class="prog"><i></i></div>
+  </div>
+</section>
+
+<section class="hz" id="ramos">
+  <div class="hz-h"><h2>Un seguro para cada cosa que te importa.</h2><p>Particulares y empresas. Cada seguro estudiado a medida y comparado entre las mejores aseguradoras.</p></div>
+  <div class="hz-run"><div class="track" id="track">
+    <a class="card" href="#"><img src="assets/img/coche.webp" alt="" loading="lazy"><span class="no">01</span><span class="tp">Particulares</span><h3>Seguro de coche</h3><p>Terceros, ampliado o todo riesgo. Con asistencia en carretera y la franquicia que tú elijas.</p><span class="go">Ver seguro</span></a>
+    <a class="card" href="#"><img src="assets/img/hogar.webp" alt="" loading="lazy"><span class="no">02</span><span class="tp">Particulares</span><h3>Seguro de hogar</h3><p>Protege tu vivienda y todo lo que hay dentro: continente, contenido y responsabilidad civil.</p><span class="go">Ver seguro</span></a>
+    <a class="card" href="#"><img src="assets/img/salud.webp" alt="" loading="lazy"><span class="no">03</span><span class="tp">Particulares</span><h3>Seguro de salud</h3><p>Acceso a los mejores cuadros médicos y hospitales con las principales compañías sanitarias.</p><span class="go">Ver seguro</span></a>
+    <a class="card" href="#"><img src="assets/img/vida.webp" alt="" loading="lazy"><span class="no">04</span><span class="tp">Particulares</span><h3>Seguro de vida</h3><p>Tranquilidad para ti y para tu familia, con capitales adaptados a tu situación.</p><span class="go">Ver seguro</span></a>
+    <a class="card" href="#"><img src="assets/img/mascotas.webp" alt="" loading="lazy"><span class="no">05</span><span class="tp">Particulares</span><h3>Seguro de mascotas</h3><p>Responsabilidad civil y gastos veterinarios para perros y gatos.</p><span class="go">Ver seguro</span></a>
+    <a class="card" href="#"><img src="assets/img/comercios.webp" alt="" loading="lazy"><span class="no">06</span><span class="tp">Empresas</span><h3>Seguro de comercios</h3><p>Local, mercancías, responsabilidad civil y pérdida de beneficios para tu negocio.</p><span class="go">Ver seguro</span></a>
+    <a class="card" href="#"><img src="assets/img/rc.webp" alt="" loading="lazy"><span class="no">07</span><span class="tp">Empresas</span><h3>Responsabilidad civil</h3><p>Cobertura frente a daños a terceros derivados de tu actividad profesional.</p><span class="go">Ver seguro</span></a>
+    <a class="card" href="#"><img src="assets/img/colectivo.webp" alt="" loading="lazy"><span class="no">08</span><span class="tp">Empresas</span><h3>Colectivos y accidentes</h3><p>Convenios, accidentes colectivos y protección para tu plantilla.</p><span class="go">Ver seguro</span></a>
+    <a class="card" href="#"><img src="assets/img/flota.webp" alt="" loading="lazy"><span class="no">09</span><span class="tp">Empresas</span><h3>Flotas de vehículos</h3><p>Gestión integral de la flota de tu empresa con una única póliza y un único interlocutor.</p><span class="go">Ver seguro</span></a>
+  </div></div>
+  <div class="hz-bar"><span id="cnt">01 / 09</span><div class="l"><i id="hzp"></i></div><span>Seguros</span></div>
+</section>
+<div id="cur">Ver</div>
+
+<section class="cias">
+  <h2>Más de 80 aseguradoras trabajan para ti.</h2>
+  <div class="mq" id="m1"></div><div class="mq rv" id="m2"></div>
+</section>
+
+<section class="nums">
+  <div class="g">
+    <div class="c"><b><em data-to="31">31</em></b><span>años de experiencia como correduría</span></div>
+    <div class="c"><b>+<em data-to="80">80</em></b><span>aseguradoras para comparar</span></div>
+    <div class="c"><b><em data-to="7">7</em></b><span>oficinas en Galicia</span></div>
+    <div class="c"><b><em data-to="24">24</em>h</b><span>asistencia ante un siniestro</span></div>
+  </div>
+</section>
+
+<section class="sin" id="siniestros">
+  <div class="sin-t">
+    <h2>¿Has tenido un siniestro? Estamos contigo.</h2>
+    <p>Nuestro departamento de siniestros te guía y gestiona el parte con la aseguradora. Asistencia las 24 horas.</p>
+    <a class="sin-tel" href="tel:+34981325961">981 325 961</a>
+  </div>
+  <ol class="sin-s">
+    <li><b>Llámanos</b><span>A tu oficina o a nuestro teléfono de asistencia, a cualquier hora.</span></li>
+    <li><b>Nos ocupamos del parte</b><span>Lo gestionamos con la aseguradora para que tú no pierdas tiempo.</span></li>
+    <li><b>Te acompañamos hasta el final</b><span>Seguimiento del siniestro hasta que queda resuelto.</span></li>
+  </ol>
+</section>
+<section class="col" id="colaboradores">
+  <figure><img src="assets/img/colegas.webp" alt="Equipo celebrando un acuerdo" loading="lazy"></figure>
+  <div>
+    <h2>Colabora con Cascudo.</h2>
+    <p>Si tienes una inmobiliaria, asesoría, clínica u otro negocio con clientes que necesitan seguros, puedes colaborar con nosotros y contar con el respaldo y la formación de una correduría registrada.</p>
+    <ul><li>Respaldo de una correduría registrada en la DGSFP</li><li>Formación para tu equipo</li><li>Más de 80 aseguradoras para tus clientes</li></ul>
+    <a class="btn" href="#">Quiero ser colaborador <span class="ar">→</span></a>
+  </div>
+</section>
+<section class="of" id="oficinas">
+  <div>
+    <h2>Siete oficinas. Un equipo a tu lado.</h2>
+    <p class="lead">Con sede central en Narón, estamos presentes en A Coruña, Vigo, Pontevedra, Ribadumia, Nigrán y Sanxenxo. Y atendemos a clientes de toda España por teléfono, WhatsApp y online.</p>
+    <ul id="olist">
+      <li data-k="0"><b>Narón · Sede central</b><small>Av. do Mar 148, 2ª Polígono · 15570</small><a href="tel:+34981325961">981 325 961</a></li>
+      <li data-k="1"><b>A Coruña</b><small>C/ Novoa Santos 4, bajo · 15006</small><a href="tel:+34981287205">981 287 205</a></li>
+      <li data-k="2"><b>Vigo</b><small>C/ Rosalía de Castro 41 bis · 36201</small><a href="tel:+34986267829">986 267 829</a></li>
+      <li data-k="3"><b>Nigrán</b><small>C/ Rosalía de Castro 11 · 36350</small><a href="tel:+34986367945">986 367 945</a></li>
+      <li data-k="4"><b>Pontevedra</b><small>C/ Castelao 9 · 36001</small><a href="tel:+34986850922">986 850 922</a></li>
+      <li data-k="5"><b>Ribadumia</b><small>Avda. de Bouza Martín 23 · 36636</small><a href="tel:+34986718470">986 718 470</a></li>
+      <li data-k="6"><b>Sanxenxo</b><small>C/ Madrid 24 · 36960</small><a href="tel:+34986487582">986 487 582</a></li>
+    </ul>
+  </div>
+  <div class="map"><svg id="svg" viewBox="0 0 500 550" preserveAspectRatio="xMidYMid meet" aria-label="Red de oficinas de Cascudo en Galicia"></svg></div>
+</section>
+
+<section class="fin" id="cierre">
+  <div class="fin-t">
+    <h2>Hablemos de tu seguro.</h2>
+    <p class="fin-p">Cuéntanos qué necesitas y te llamamos. Sin compromiso.</p>
+    <ul class="fin-c">
+      <li><small>Teléfono</small><a href="tel:+34981325961">981 325 961</a></li>
+      <li><small>Email</small><a href="mailto:cascudo@cascudo.es">cascudo@cascudo.es</a></li>
+      <li><small>Oficinas</small><a href="#oficinas">Narón · A Coruña · Vigo · Pontevedra · Nigrán · Ribadumia · Sanxenxo</a></li>
+    </ul>
+  </div>
+  <form class="frm" onsubmit="event.preventDefault();this.classList.add('ok')">
+    <label>Nombre<input name="n" required autocomplete="name"></label>
+    <label>Teléfono<input name="t" type="tel" required autocomplete="tel"></label>
+    <label>¿Qué quieres asegurar?<select name="q"><option>Coche</option><option>Hogar</option><option>Salud</option><option>Vida</option><option>Mascota</option><option>Mi negocio / empresa</option><option>Otro</option></select></label>
+    <label class="chk"><input type="checkbox" required> Acepto la política de privacidad</label>
+    <button class="btn" type="submit">Quiero que me llamen <span class="ar">→</span></button>
+    <p class="done">¡Gracias! Te llamaremos en breve. (En la web real, este formulario se conecta con WPForms.)</p>
+  </form>
+</section>
+
+<footer>
+  <div><img src="assets/img/logo-cascudo.png" alt="Cascudo" width="231" height="30"><p>Correduría de seguros independiente con sede en Narón y oficinas en toda Galicia. Atendemos a clientes de toda España.</p></div>
+  <div><h4>Particulares</h4><ul><li>Coche</li><li>Hogar</li><li>Salud</li><li>Vida</li></ul></div>
+  <div><h4>Empresas</h4><ul><li>Comercios</li><li>Responsabilidad civil</li><li>Colectivos</li><li>Flotas</li></ul></div>
+  <div><h4>Contacto</h4><ul><li>981 325 961</li><li>cascudo@cascudo.es</li><li>Narón · A Coruña · Vigo</li></ul></div>
+</footer>
+<div class="legal">Cascudo Correduría de Seguros · Inscrita en la DGSFP con clave J2354 · Maqueta de propuesta de diseño: contenidos reales de cascudo.es.</div>
+
+<script src="assets/js/gsap.min.js"></script>
+<script src="assets/js/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,desk=matchMedia("(min-width:901px)").matches;
+// logos
+var L=["adeslas","allianz","axa","dkv","reale","zurich","occident","sanitas","asisa","arag","murimar"];
+function fill(id,list){var h="";list.concat(list).forEach(function(k){h+='<div><img src="assets/img/logo-'+k+'.png" alt="'+k+'" loading="lazy"></div>'});document.getElementById(id).innerHTML=h}
+fill("m1",L);fill("m2",L.slice().reverse());
+// cabecera
+var nav=document.getElementById("nav");function sc(){nav.classList.toggle("on",scrollY>40)}sc();addEventListener("scroll",sc,{passive:true});
+// mapa en red
+var O=[["Narón",43.4897,-8.2020,1,1],["A Coruña",43.3571,-8.3994,0,1],["Vigo",42.2380,-8.7155],["Nigrán",42.1401,-8.8065,0,1],["Pontevedra",42.4298,-8.6601],["Ribadumia",42.5010,-8.7684,0,1],["Sanxenxo",42.4003,-8.8072,0,1]];
+var la=[42.05,43.58],lo=[-8.95,-8.05],W=500,H=550;
+function P(o){return[40+(o[2]-lo[0])/(lo[1]-lo[0])*(W-80),40+(1-(o[1]-la[0])/(la[1]-la[0]))*(H-80)]}
+var s='';for(var i=1;i<8;i++){s+='<line x1="'+(i*62.5)+'" y1="0" x2="'+(i*62.5)+'" y2="550" stroke="rgba(255,255,255,.05)"/>'}for(i=1;i<9;i++){s+='<line x1="0" y1="'+(i*61)+'" x2="500" y2="'+(i*61)+'" stroke="rgba(255,255,255,.05)"/>'}
+var sp=P(O[0]);
+O.forEach(function(o,k){if(k){var p=P(o);s+='<path class="lnk" d="M'+sp[0]+' '+sp[1]+' Q'+((sp[0]+p[0])/2+40)+' '+((sp[1]+p[1])/2)+' '+p[0]+' '+p[1]+'"/>'}});
+O.forEach(function(o,k){var p=P(o),r=o[3]?9:6;s+='<g class="pt-g" data-k="'+k+'"><circle class="ring" cx="'+p[0]+'" cy="'+p[1]+'" r="'+r+'" style="animation-delay:'+(k*.35)+'s"/><circle class="pt'+(o[3]?' s':'')+'" cx="'+p[0]+'" cy="'+p[1]+'" r="'+r+'"/><text class="lbl" text-anchor="'+(o[4]?'end':'start')+'" x="'+(p[0]+(o[4]?-16:14))+'" y="'+(p[1]+4)+'">'+o[0]+'</text></g>'});
+document.getElementById("svg").innerHTML=s;
+var items=[].slice.call(document.querySelectorAll("#olist li")),gs=[].slice.call(document.querySelectorAll(".pt-g"));
+function act(k){items.forEach(function(e,i){e.classList.toggle("on",i==k)});gs.forEach(function(e,i){e.classList.toggle("on",i==k)})}
+items.forEach(function(e,i){e.addEventListener("mouseenter",function(){act(i)})});gs.forEach(function(e,i){e.addEventListener("mouseenter",function(){act(i)})});act(0);
+// contadores
+function count(el){var to=+el.dataset.to,o={v:0};gsap.to(o,{v:to,duration:2.2,ease:"power2.out",onUpdate:function(){el.textContent=Math.round(o.v)}})}
+if(window.gsap&&window.ScrollTrigger&&!reduce){
+  document.documentElement.classList.add("js");gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll(".nums [data-to]").forEach(function(el){el.textContent=0;ScrollTrigger.create({trigger:el,start:"top 85%",once:true,onEnter:function(){count(el)}})});
+  // historia fijada
+  var st=gsap.utils.toArray(".st");
+  if(desk){
+    gsap.set(st.slice(1),{autoAlpha:0,y:70});
+    var tl=gsap.timeline({defaults:{ease:"none"},scrollTrigger:{trigger:".story",start:"top top",end:"+=320%",pin:".story-pin",scrub:.7,onEnter:function(){count(document.getElementById("n31"))}}});
+    tl.to(".big",{scale:1.12,x:-20,duration:3},0).to(".prog i",{scaleX:1,duration:3},0);
+    st.forEach(function(e,i){if(i){tl.to(st[i-1],{autoAlpha:0,y:-70,duration:.5},i*1-.0).to(e,{autoAlpha:1,y:0,duration:.5},i*1+.1)}});
+  }else{gsap.set(".prog",{display:"none"});ScrollTrigger.create({trigger:".big",start:"top 80%",once:true,onEnter:function(){count(document.getElementById("n31"))}})}
+  // ramos horizontal
+  var tr=document.getElementById("track"),cnt=document.getElementById("cnt"),hp=document.getElementById("hzp"),n=tr.children.length;
+  if(desk){
+    var dist=function(){return tr.scrollWidth-innerWidth+parseFloat(getComputedStyle(tr).paddingRight)};
+    gsap.to(tr,{x:function(){return -dist()},ease:"none",scrollTrigger:{trigger:".hz-run",start:"top top",end:function(){return"+="+dist()},pin:".hz",pinSpacing:true,scrub:.6,invalidateOnRefresh:true,onUpdate:function(s){hp.style.transform="scaleX("+s.progress+")";var i=Math.min(n,Math.floor(s.progress*n)+1);cnt.textContent=("0"+i).slice(-2)+" / "+("0"+n).slice(-2)}}});
+    // cursor "Ver"
+    var cur=document.getElementById("cur"),cx=gsap.quickTo(cur,"x",{duration:.35,ease:"power3"}),cy=gsap.quickTo(cur,"y",{duration:.35,ease:"power3"});
+    addEventListener("mousemove",function(e){cx(e.clientX);cy(e.clientY)});
+    document.querySelectorAll(".card").forEach(function(c){c.addEventListener("mouseenter",function(){cur.classList.add("on")});c.addEventListener("mouseleave",function(){cur.classList.remove("on")})});
+    // botones magnéticos
+    document.querySelectorAll(".mag").forEach(function(b){var mx=gsap.quickTo(b,"x",{duration:.4,ease:"power3"}),my=gsap.quickTo(b,"y",{duration:.4,ease:"power3"});b.addEventListener("mousemove",function(e){var r=b.getBoundingClientRect();mx((e.clientX-r.left-r.width/2)*.25);my((e.clientY-r.top-r.height/2)*.35)});b.addEventListener("mouseleave",function(){mx(0);my(0)})});
+  }
+  // parallax hero
+  gsap.to(".hero .bg",{yPercent:12,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
+  // titulares de sección
+  gsap.utils.toArray(".cias h2,.of h2,.hz-h h2").forEach(function(h){gsap.from(h,{y:60,opacity:0,duration:1,ease:"power3.out",scrollTrigger:{trigger:h,start:"top 85%"}})});
+  gsap.from(".fin h2",{y:90,opacity:0,duration:1.2,ease:"power3.out",scrollTrigger:{trigger:".fin",start:"top 70%"}});
+}
+})();
+</script>
+<script>
+(function(){if(!(window.gsap&&window.ScrollTrigger)||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+gsap.utils.toArray(".sin h2,.col h2").forEach(function(e){gsap.from(e,{y:56,opacity:0,duration:1,ease:"power3.out",scrollTrigger:{trigger:e,start:"top 88%"}})});
+gsap.from(".col figure",{clipPath:"inset(0 0 100% 0)",duration:1.3,ease:"power3.inOut",scrollTrigger:{trigger:".col",start:"top 72%"}});
+gsap.from(".sin-s li",{opacity:0,y:30,stagger:.14,duration:.8,ease:"power3.out",scrollTrigger:{trigger:".sin-s",start:"top 85%"}});})();
+</script>
+</body>
+</html>

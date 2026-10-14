@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cascudo Correduría de Seguros · Propuesta de home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B2B47; --navy2:#123C63; --blue:#2B93DD; --blue-d:#066AAB;
+  --ink:#0B1B2B; --mute:#5B6B7A; --line:rgba(11,27,43,.14); --line-w:rgba(255,255,255,.22);
+  --soft:#F2F5F8; --white:#fff; --r:4px;
+  --pad:clamp(20px,4vw,56px); --max:1320px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;line-height:1.5;font-size:17px}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+h1,h2,h3{font-weight:700;letter-spacing:-.025em;line-height:1.04}
+.btn{display:inline-flex;align-items:center;gap:.6em;padding:.95em 1.5em;border-radius:var(--r);font-weight:700;font-size:15px;letter-spacing:.005em;border:1.5px solid transparent;transition:background .25s,color .25s,border-color .25s,transform .25s;cursor:pointer}
+.btn .ar{transition:transform .25s}
+.btn:hover .ar{transform:translateX(5px)}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:var(--blue-d)}
+.btn-line{border-color:var(--line-w);color:#fff}.btn-line:hover{background:#fff;color:var(--navy)}
+.btn-dark{background:var(--navy);color:#fff}.btn-dark:hover{background:var(--blue-d)}
+.btn-out{border-color:var(--ink);color:var(--ink)}.btn-out:hover{background:var(--ink);color:#fff}
+.lnk{font-weight:700;border-bottom:1.5px solid currentColor;padding-bottom:2px;display:inline-flex;gap:.5em;transition:gap .25s}
+.lnk:hover{gap:.9em}
+
+/* progreso */
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--blue);z-index:100}
+
+/* cabecera */
+header.top{position:fixed;inset:0 0 auto 0;z-index:90;transition:background .3s,box-shadow .3s,color .3s;color:#fff}
+header.top .bar{display:flex;align-items:center;gap:clamp(20px,3vw,48px);height:84px;border-bottom:1px solid var(--line-w);transition:height .3s,border-color .3s}
+header.top .logo img{height:30px;width:auto;filter:brightness(0) invert(1);transition:filter .3s}
+header.top nav{display:flex;gap:clamp(14px,1.8vw,28px);margin-left:auto;font-weight:600;font-size:15px;white-space:nowrap}
+header.top nav>div{position:relative}
+header.top nav a.t{padding:30px 0;display:block;position:relative}
+header.top nav a.t::after{content:"";position:absolute;left:0;right:0;bottom:22px;height:2px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+header.top nav>div:hover a.t::after{transform:scaleX(1)}
+.drop{position:absolute;top:84px;left:-24px;min-width:300px;background:#fff;color:var(--ink);padding:14px;border-radius:0 0 var(--r) var(--r);box-shadow:0 24px 50px rgba(8,28,48,.18);opacity:0;visibility:hidden;transform:translateY(8px);transition:.25s}
+nav>div:hover .drop{opacity:1;visibility:visible;transform:none}
+.drop a{display:flex;justify-content:space-between;padding:11px 14px;border-radius:var(--r);font-weight:600;font-size:15px}
+.drop a:hover{background:var(--soft);color:var(--blue-d)}
+header.top .cta{display:flex;align-items:center;gap:20px;font-weight:700;font-size:15px;white-space:nowrap}
+header.top .cta .btn{padding:.8em 1.25em;white-space:nowrap}
+header.top.solid{background:#fff;color:var(--ink);box-shadow:0 1px 0 var(--line)}
+header.top.solid .bar{height:70px;border-color:transparent}
+header.top.solid .logo img{filter:none}
+header.top.solid nav a.t{padding:23px 0}
+header.top.solid .drop{top:70px}
+.burger{display:none;margin-left:auto;background:none;border:0;color:inherit;width:44px;height:44px;cursor:pointer}
+.burger span{display:block;width:24px;height:2px;background:currentColor;margin:6px 10px}
+
+/* hero */
+.hero{position:relative;min-height:min(100svh,880px);display:flex;flex-direction:column;justify-content:flex-end;color:#fff;overflow:hidden;background:var(--navy)}
+.hero .bg{position:absolute;inset:-4% 0 0 0;background:url('https://www.cascudo.es/wp-content/uploads/2024/04/happy-real-estate-agent-having-meeting-with-young-couple-pointing-place-signature-their-contract-1-scaled-1.jpg') 68% 28%/cover;transform:scale(1.08);animation:zoomIn 2.2s cubic-bezier(.2,.7,.2,1) forwards;will-change:transform}
+@keyframes zoomIn{to{transform:scale(1)}}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,32,54,.92) 0%,rgba(8,32,54,.7) 42%,rgba(8,32,54,.25) 100%),linear-gradient(0deg,rgba(8,32,54,.85),rgba(8,32,54,0) 45%);z-index:1}
+.hero .hc{position:relative;z-index:2;width:100%;padding-top:130px;padding-bottom:48px}
+.hero h1{font-size:clamp(44px,7vw,106px);max-width:11em;font-weight:800;letter-spacing:-.035em}
+.hero p.sub{font-size:clamp(17px,1.5vw,21px);max-width:33em;margin-top:24px;color:rgba(255,255,255,.88);font-weight:500}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
+.facts{position:relative;z-index:2;border-top:1px solid var(--line-w);background:rgba(8,32,54,.55);backdrop-filter:blur(6px)}
+.facts .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.facts .wrap>div{padding:22px 24px 22px 0;font-size:14px;color:rgba(255,255,255,.75);border-right:1px solid var(--line-w);padding-left:24px}
+.facts .wrap>div:first-child{padding-left:0}
+.facts .wrap>div:last-child{border-right:0}
+.facts .wrap>div b{display:block;color:#fff;font-size:20px;font-weight:700;letter-spacing:-.01em;margin-bottom:2px}
+
+/* secciones */
+section{padding:clamp(72px,10vw,150px) 0}
+.intro{background:var(--navy2);color:#fff}
+.intro .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(30px,6vw,96px);align-items:center}
+.intro h2{font-size:clamp(30px,4vw,56px);font-weight:700}
+.intro p{margin-top:26px;color:rgba(255,255,255,.8);max-width:36em}
+.intro .ph{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3.1;transform-style:preserve-3d;transition:transform .2s ease-out;box-shadow:0 40px 80px rgba(0,0,0,.35)}
+.intro .ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.04)}
+.sec-h{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.sec-h h2{font-size:clamp(36px,5.6vw,84px);font-weight:800;letter-spacing:-.035em}
+.sec-h p{color:var(--mute);max-width:30em;justify-self:end;font-size:18px}
+.dark{background:var(--navy);color:#fff}
+.dark .sec-h p{color:rgba(255,255,255,.72)}
+
+/* filas de seguros */
+.rows{border-top:1px solid var(--line)}
+.dark .rows{border-color:var(--line-w)}
+.row{display:grid;grid-template-columns:72px 1.1fr 1.4fr 48px;gap:20px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line);position:relative;transition:padding .35s,background .35s}
+.dark .row{border-color:var(--line-w)}
+.row .n{font-size:14px;font-weight:700;color:var(--mute);font-variant-numeric:tabular-nums}
+.dark .row .n{color:rgba(255,255,255,.5)}
+.row h3{font-size:clamp(24px,2.7vw,40px);font-weight:700;letter-spacing:-.03em;transition:transform .35s,color .35s}
+.row p{color:var(--mute);font-size:16px;max-width:30em}
+.dark .row p{color:rgba(255,255,255,.7)}
+.row .go{width:44px;height:44px;border:1.5px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:.3s;justify-self:end}
+.dark .row .go{border-color:var(--line-w)}
+.row:hover{padding-left:18px;padding-right:18px;background:var(--soft)}
+.dark .row:hover{background:rgba(255,255,255,.06)}
+.row:hover h3{color:var(--blue-d);transform:translateX(4px)}
+.dark .row:hover h3{color:#fff}
+.row:hover .go{background:var(--blue);border-color:var(--blue);color:#fff;transform:rotate(-45deg)}
+#peek{position:fixed;width:300px;height:200px;border-radius:var(--r);background:#ccc center/cover;pointer-events:none;z-index:60;opacity:0;transform:translate(-50%,-50%) scale(.9);transition:opacity .25s,transform .25s;box-shadow:0 24px 60px rgba(8,28,48,.35)}
+#peek.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+/* aseguradoras */
+.cias{padding:clamp(48px,6vw,84px) 0;border-bottom:1px solid var(--line)}
+.cias .t{font-weight:700;font-size:15px;color:var(--mute);margin-bottom:30px}
+.cias .logos{display:grid;grid-template-columns:repeat(6,1fr);gap:20px 40px;align-items:center}
+.cias img{height:36px;width:100%;object-fit:contain;filter:grayscale(1) opacity(.65);mix-blend-mode:multiply;transition:filter .3s}
+.cias img:hover{filter:none}
+
+/* cifras */
+.nums .wrap{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.nums .c{padding:clamp(34px,4.6vw,64px) 28px;border-right:1px solid var(--line)}
+.nums .c:first-child{padding-left:0}.nums .c:last-child{border:0}
+.nums b{display:block;font-size:clamp(54px,8vw,120px);font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--navy2);font-variant-numeric:tabular-nums}
+.nums span{display:block;margin-top:14px;color:var(--mute);font-weight:600}
+.nums-s{padding:0}
+
+/* oficinas */
+.of{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,80px);align-items:start}
+.of .list{border-top:1px solid var(--line)}
+.of .it{display:grid;grid-template-columns:1.1fr 1.4fr auto;gap:16px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line);transition:.3s}
+.of .it b{font-size:22px;letter-spacing:-.02em}
+.of .it small{color:var(--mute);font-size:15px;display:block}
+.of .it .tel{font-weight:700}
+.of .it:hover{padding-left:14px;background:var(--soft)}
+.of .it:hover b{color:var(--blue-d)}
+.map{position:sticky;top:100px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);aspect-ratio:1/1.05;background:var(--soft)}
+#gmap{width:100%;height:100%}.pin{width:18px;height:18px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 2px 10px rgba(8,28,48,.4)}.pin.s{width:24px;height:24px;background:var(--navy2)}.leaflet-container{font-family:Manrope,sans-serif;background:#eef1f4}.leaflet-tile-pane{filter:grayscale(1) contrast(.92) brightness(1.06)}
+
+/* colaboradores */
+.colab .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,96px);align-items:center}
+.colab h2{font-size:clamp(34px,4.8vw,70px);font-weight:800}
+.colab ul{list-style:none;margin:30px 0 36px;border-top:1px solid var(--line-w)}
+.colab li{padding:16px 0;border-bottom:1px solid var(--line-w);display:flex;gap:14px;font-weight:600;font-size:18px}
+.colab li::before{content:"";width:9px;height:9px;margin-top:9px;border-radius:50%;background:var(--blue);flex:none}
+.colab .ph{border-radius:var(--r);overflow:hidden;aspect-ratio:4/4.6}
+.colab .ph img{width:100%;height:100%;object-fit:cover}
+
+/* opiniones */
+.rev{background:var(--soft)}
+.rev .box{border:1px dashed rgba(11,27,43,.3);border-radius:var(--r);padding:clamp(30px,4vw,56px);display:grid;grid-template-columns:repeat(3,1fr);gap:24px;background:#fff}
+.rev .sk{height:150px;border-radius:var(--r);background:linear-gradient(90deg,#eef1f4,#f7f9fb,#eef1f4);background-size:200% 100%;animation:sh 2.2s infinite linear}
+@keyframes sh{to{background-position:-200% 0}}
+.rev .note{margin-top:16px;color:var(--mute);font-size:14px}
+
+/* blog */
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.post{display:block}
+.post .im{aspect-ratio:3/2;border-radius:var(--r);overflow:hidden;background:var(--soft)}
+.post .im img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.post:hover img{transform:scale(1.06)}
+.post h3{font-size:24px;margin-top:20px;letter-spacing:-.02em;line-height:1.15}
+.post small{color:var(--mute);font-weight:600;display:block;margin-top:10px}
+
+/* faq */
+.faq{max-width:900px}
+details{border-bottom:1px solid var(--line)}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;padding:26px 0;font-weight:700;font-size:21px;letter-spacing:-.015em}
+summary::-webkit-details-marker{display:none}
+summary i{width:30px;height:30px;position:relative;flex:none}
+summary i::before,summary i::after{content:"";position:absolute;left:5px;right:5px;top:14px;height:2px;background:var(--ink);transition:transform .3s}
+summary i::after{transform:rotate(90deg)}
+details[open] summary i::after{transform:rotate(0)}
+details p{padding:0 0 28px;color:var(--mute);max-width:44em}
+
+/* cta + footer */
+.band{background:var(--blue-d);color:#fff;padding:clamp(70px,9vw,130px) 0}
+.band .bin{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.band h2{font-size:clamp(40px,6.4vw,100px);font-weight:800;letter-spacing:-.04em;max-width:10em}
+footer{background:#071E33;color:rgba(255,255,255,.72);padding:80px 0 34px;font-size:15px}
+footer .g{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px;border-bottom:1px solid var(--line-w)}
+footer img{height:30px;filter:brightness(0) invert(1);margin-bottom:22px}
+footer h4{color:#fff;font-size:15px;margin-bottom:16px}
+footer li{list-style:none;margin:9px 0}
+footer a:hover{color:#fff}
+footer .legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;font-size:13px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+
+@media (max-width:980px){
+  header.top nav,header.top .cta .tel{display:none}
+  header.top .cta{margin-left:auto}
+  .burger{display:block;margin-left:0}
+  header.top.open{background:#fff;color:var(--ink)}
+  header.top.open .logo img{filter:none}
+  header.top.open nav{display:flex;position:absolute;top:84px;left:0;right:0;background:#fff;color:var(--ink);flex-direction:column;padding:10px var(--pad) 24px;gap:0;box-shadow:0 20px 40px rgba(0,0,0,.15)}
+  header.top.open nav a.t{padding:16px 0;border-bottom:1px solid var(--line)}
+  header.top.open .drop{display:none}
+  .facts .wrap{grid-template-columns:1fr 1fr}
+  .facts .wrap>div:nth-child(2){border-right:0}
+  .facts .wrap>div:nth-child(3){padding-left:0;border-top:1px solid var(--line-w)}
+  .facts .wrap>div:nth-child(4){border-top:1px solid var(--line-w)}
+  .intro .grid,.sec-h,.of,.colab .grid,.posts,footer .g{grid-template-columns:1fr}
+  .sec-h p{justify-self:start}
+  .row{grid-template-columns:40px 1fr 44px}
+  .row p{display:none}
+  .cias .logos{grid-template-columns:repeat(3,1fr)}
+  .nums .wrap{grid-template-columns:1fr 1fr}
+  .nums .c:nth-child(2){border-right:0}
+  .nums .c:nth-child(3){padding-left:0;border-top:1px solid var(--line)}
+  .nums .c:nth-child(4){border-top:1px solid var(--line)}
+  .of .it{grid-template-columns:1fr auto}.of .it small{display:none}
+  .map{position:static}
+  .rev .box{grid-template-columns:1fr}
+  #peek{display:none}
+}
+@media (max-width:560px){header.top .logo img{height:24px;width:auto;max-width:none}header.top .cta .btn{display:none}.burger{margin-left:auto}}
+@media (prefers-reduced-motion:reduce){
+  .hero .bg{animation:none;transform:none}
+  .rv{opacity:1;transform:none;transition:none}
+  *{scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<header class="top" id="hd">
+ <div class="wrap bar">
+  <a class="logo" href="#"><img src="https://www.cascudo.es/wp-content/uploads/2023/11/logo-cascudo-300x39-1.png" alt="Cascudo Correduría de Seguros" width="231" height="30"></a>
+  <nav>
+   <div><a class="t" href="#particulares">Seguros particulares</a>
+    <div class="drop"><a href="#">Seguro de coche <span>→</span></a><a href="#">Seguro de hogar <span>→</span></a><a href="#">Seguro de salud <span>→</span></a><a href="#">Seguro de vida <span>→</span></a><a href="#">Seguro de decesos <span>→</span></a><a href="#">Ver todos los seguros <span>→</span></a></div></div>
+   <div><a class="t" href="#empresas">Seguros para empresas</a>
+    <div class="drop"><a href="#">Responsabilidad civil <span>→</span></a><a href="#">Salud para empresas <span>→</span></a><a href="#">Comercios y pymes <span>→</span></a><a href="#">Flotas <span>→</span></a><a href="#">Accidentes para academias de formación <span>→</span></a></div></div>
+   <div><a class="t" href="#oficinas">Oficinas</a></div>
+   <div><a class="t" href="#colaboradores">Colaboradores</a></div>
+   <div><a class="t" href="#blog">Blog</a></div>
+  </nav>
+  <div class="cta"><a class="tel" href="tel:+34981325961">981 325 961</a><a class="btn btn-blue" href="#presupuesto">Pedir presupuesto</a></div>
+  <button class="burger" aria-label="Menú" onclick="document.getElementById('hd').classList.toggle('open')"><span></span><span></span></button>
+ </div>
+</header>
+
+<main>
+<section class="hero" style="padding:0">
+ <div class="bg" id="herobg"></div>
+ <div class="wrap hc">
+  <h1 class="rv">Correduría de seguros en toda España</h1>
+  <p class="sub rv d1">Seguros para particulares y empresas. Comparamos entre más de 80 aseguradoras para encontrar la cobertura que mejor encaja contigo, con atención presencial, telefónica y online.</p>
+  <div class="ctas rv d2"><a class="btn btn-blue" href="#presupuesto">Pedir presupuesto <span class="ar">→</span></a><a class="btn btn-line" href="#oficinas">Encuentra tu oficina</a></div>
+ </div>
+ <div class="facts"><div class="wrap">
+  <div><b>7 oficinas</b>en Galicia</div>
+  <div><b>+80 aseguradoras</b>comparadas para ti</div>
+  <div><b>31 años</b>de trayectoria</div>
+  <div><b>DGSFP J2354</b>correduría registrada</div>
+ </div></div>
+</section>
+
+<section class="intro">
+ <div class="wrap grid">
+  <div>
+   <h2 class="rv">Una correduría independiente, que trabaja para ti y no para una aseguradora.</h2>
+   <p class="rv d1">Analizamos tu situación, comparamos el mercado y te acompañamos durante toda la vida de la póliza: renovaciones, cambios y, sobre todo, cuando ocurre un siniestro.</p>
+   <p class="rv d2" style="margin-top:34px"><a class="btn btn-line" href="#">Conoce Cascudo <span class="ar">→</span></a></p>
+  </div>
+  <div class="ph rv d1" id="tilt"><img src="https://www.cascudo.es/wp-content/uploads/2024/03/asesora-de-seguros-cascudo-scaled-1.jpg" alt="Asesora de Cascudo atendiendo a un cliente" loading="lazy"></div>
+ </div>
+</section>
+
+<section id="particulares">
+ <div class="wrap">
+  <div class="sec-h"><h2 class="rv">Seguros para particulares</h2><p class="rv d1">Protege lo que más te importa: tu coche, tu casa, tu salud y a los tuyos. Un asesor te lo explica sin letra pequeña.</p></div>
+  <div class="rows">
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/seguro-coche5.jpg"><span class="n">01</span><h3>Seguro de coche</h3><p>A terceros, ampliado o a todo riesgo, con asistencia en carretera.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/10/seguro-hogar.jpg"><span class="n">02</span><h3>Seguro de hogar</h3><p>Vivienda propia o alquilada: incendio, agua, robo y responsabilidad civil.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2025/07/segurosalud_hero_img_cascudo-copia-1024x683-1.png"><span class="n">03</span><h3>Seguro de salud</h3><p>Cuadro médico individual o familiar, con las mejores aseguradoras del mercado.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/seguros-vida.jpg"><span class="n">04</span><h3>Seguro de vida</h3><p>Un capital para proteger a tu familia y tus compromisos económicos.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/seguro-mascotas.jpg"><span class="n">05</span><h3>Seguro para mascotas</h3><p>Responsabilidad civil, veterinario y asistencia para perros y gatos.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/10/seguro-viaje.jpg"><span class="n">06</span><h3>Seguro de viaje</h3><p>Asistencia médica, cancelación y equipaje en España y en el extranjero.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/seguro-moto-1.jpg"><span class="n">07</span><h3>Seguro de moto</h3><p>Moto 125, ciclomotor y scooter: del seguro obligatorio al todo riesgo.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/seguro-embarcaciones-recreo.jpg"><span class="n">08</span><h3>Embarcaciones de recreo</h3><p>Barcos a motor, veleros y motos de agua, a terceros o a todo riesgo.</p><span class="go">→</span></a>
+  </div>
+  <p class="rv" style="margin-top:34px"><a class="lnk" href="#">Ver todos los seguros para particulares <span>→</span></a></p>
+ </div>
+</section>
+
+<section class="dark" id="empresas">
+ <div class="wrap">
+  <div class="sec-h"><h2 class="rv">Seguros para empresas</h2><p class="rv d1">Somos especialistas en seguros para empresas, autónomos y entidades de todos los sectores. Diseñamos la póliza a la medida de tu actividad.</p></div>
+  <div class="rows">
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/seguro-rc2.jpg"><span class="n">01</span><h3>Responsabilidad civil</h3><p>Daños a terceros y defensa jurídica para tu empresa o comercio.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/salud-empresas.jpg"><span class="n">02</span><h3>Salud para empresas</h3><p>Un cuadro médico privado para tus trabajadores, con ventajas fiscales.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/seguro.comercios.jpg"><span class="n">03</span><h3>Comercios y pymes</h3><p>Protege el local, el contenido y la actividad de tu negocio.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/seguro-colectivo.jpg"><span class="n">04</span><h3>Accidentes colectivos y de convenio</h3><p>Cobertura para plantillas y obligaciones de convenio colectivo.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/seguro-flota.jpg"><span class="n">05</span><h3>Flotas de vehículos</h3><p>Una sola póliza para todos los vehículos de tu empresa.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/seguro-empresarios.jpg"><span class="n">06</span><h3>Empresarios y directivos</h3><p>Seguros profesionales para quienes toman las decisiones.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/12/ries.jpg"><span class="n">07</span><h3>Caución y crédito</h3><p>Garantías para contratos y cobertura frente al impago de clientes.</p><span class="go">→</span></a>
+   <a class="row rv" href="#" data-img="https://www.cascudo.es/wp-content/uploads/2024/04/surprised-screaming-young-business-colleagues_11zon-scaled-1.jpg"><span class="n">08</span><h3>Accidentes para academias de formación</h3><p>Cobertura temporal para tus alumnos, por días, semanas o curso completo.</p><span class="go">→</span></a>
+  </div>
+ </div>
+</section>
+
+<div class="cias"><div class="wrap">
+ <p class="t rv">Trabajamos con las principales aseguradoras</p>
+ <div class="logos rv d1">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/adeslas.png" alt="Adeslas" loading="lazy">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/Allianz-logo-1.png" alt="Allianz" loading="lazy">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/png-clipart-axa-logo-insurance-bank-wealth-blue-angle.png" alt="AXA" loading="lazy">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/dkv-logo.png" alt="DKV" loading="lazy">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/Logo_Reale_Mutua_2015.png" alt="Reale" loading="lazy">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/Zurich_Insurance_Group_Logo_Horizontal-1.png" alt="Zurich" loading="lazy">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/Occident.png" alt="Occident" loading="lazy">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/sanitas-logo.png" alt="Sanitas" loading="lazy">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/Logo-asisa-1-1-1.png" alt="Asisa" loading="lazy">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/ARAG_Logo_2016.png" alt="ARAG" loading="lazy">
+  <img src="https://www.cascudo.es/wp-content/uploads/2026/02/murimar.png" alt="Murimar" loading="lazy">
+ </div>
+</div></div>
+
+<section class="nums nums-s" style="padding:clamp(60px,7vw,100px) 0 0">
+ <div class="wrap">
+  <div class="c rv"><b data-to="31">0</b><span>años de trayectoria</span></div>
+  <div class="c rv d1"><b data-to="7">0</b><span>oficinas en Galicia</span></div>
+  <div class="c rv d2"><b data-to="80" data-plus="1">0</b><span>aseguradoras comparadas</span></div>
+  <div class="c rv d3"><b data-to="24">0</b><span>horas de asistencia en siniestros</span></div>
+ </div>
+</section>
+
+<section id="oficinas">
+ <div class="wrap">
+  <div class="sec-h"><h2 class="rv">Siete oficinas en Galicia</h2><p class="rv d1">Con sede en Narón y oficinas en A Coruña, Vigo, Pontevedra, Ribadumia, Nigrán y Sanxenxo. Ven a vernos o llámanos.</p></div>
+  <div class="of">
+   <div class="list">
+    <a class="it rv" href="#"><div><b>Narón</b><small>Sede central</small></div><small>Av. do Mar 148, 2ª Polígono · 15570</small><span class="tel">981 325 961</span></a>
+    <a class="it rv" href="#"><div><b>A Coruña</b></div><small>C/ Novoa Santos 4, bajo · 15006</small><span class="tel">981 287 205</span></a>
+    <a class="it rv" href="#"><div><b>Vigo</b></div><small>C/ Rosalía de Castro 41 bis · 36201</small><span class="tel">986 267 829</span></a>
+    <a class="it rv" href="#"><div><b>Pontevedra</b></div><small>C/ Castelao 9 · 36001</small><span class="tel">986 850 922</span></a>
+    <a class="it rv" href="#"><div><b>Ribadumia</b></div><small>Avda. de Bouza Martín 23 · 36636</small><span class="tel">986 718 470</span></a>
+    <a class="it rv" href="#"><div><b>Nigrán</b></div><small>C/ Rosalía de Castro 11 · 36350</small><span class="tel">986 367 945</span></a>
+    <a class="it rv" href="#"><div><b>Sanxenxo</b></div><small>C/ Madrid 24 · 36960</small><span class="tel">986 487 582</span></a>
+   </div>
+   <div class="map rv d1"><div id="gmap"></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="dark colab" id="colaboradores">
+ <div class="wrap grid">
+  <div>
+   <h2 class="rv">Crece con nosotros: hazte colaborador</h2>
+   <ul class="rv d1"><li>Acceso a un amplio abanico de aseguradoras.</li><li>Apoyo del equipo en cada operación, con departamento propio de siniestros.</li><li>Formación comercial en técnicas de venta y portal de colaboradores.</li></ul>
+   <div class="rv d2" style="display:flex;gap:14px;flex-wrap:wrap"><a class="btn btn-blue" href="#">Quiero ser colaborador <span class="ar">→</span></a><a class="btn btn-line" href="#">Cómo funciona</a></div>
+  </div>
+  <div class="ph rv d1"><img src="https://www.cascudo.es/wp-content/uploads/2026/07/Fundadores-Cascudo-Correduria-de-Seguros-scaled.webp" alt="Equipo de Cascudo Correduría de Seguros" loading="lazy"></div>
+ </div>
+</section>
+
+<section class="rev">
+ <div class="wrap">
+  <div class="sec-h"><h2 class="rv">Lo que dicen nuestros clientes</h2><p class="rv d1">Valoraciones reales de clientes de Cascudo en Google.</p></div>
+  <div class="box rv"><div class="sk"></div><div class="sk"></div><div class="sk"></div></div>
+  <p class="note">Maqueta: aquí se integra el widget de reseñas de Google (Trustindex) con las valoraciones reales.</p>
+ </div>
+</section>
+
+<section id="blog">
+ <div class="wrap">
+  <div class="sec-h"><h2 class="rv">Guías y novedades del seguro</h2><p class="rv d1">Contenido útil para entender tus coberturas y decidir mejor.</p></div>
+  <div class="posts">
+   <a class="post rv" href="#"><div class="im"><img src="https://www.cascudo.es/wp-content/uploads/2026/07/Fundadores-Cascudo-Correduria-de-Seguros-scaled.webp" alt="" loading="lazy"></div><h3>31 años de trayectoria de Cascudo Correduría de Seguros</h3><small>Julio 2026</small></a>
+   <a class="post rv d1" href="#"><div class="im"><img src="https://www.cascudo.es/wp-content/uploads/2024/12/seguros-vida.jpg" alt="" loading="lazy"></div><h3>El seguro de vida: proteger a la familia</h3><small>Febrero 2026</small></a>
+   <a class="post rv d2" href="#"><div class="im"><img src="https://www.cascudo.es/wp-content/uploads/2026/01/IMAGEN-PATINETE-RS-20260115.jpg" alt="" loading="lazy"></div><h3>Seguro obligatorio y matrícula para VMP</h3><small>Febrero 2026</small></a>
+  </div>
+ </div>
+</section>
+
+<section style="padding-top:0">
+ <div class="wrap">
+  <div class="sec-h"><h2 class="rv">Preguntas frecuentes</h2><p></p></div>
+  <div class="faq rv">
+   <details><summary>¿Qué es una correduría de seguros y en qué se diferencia de una aseguradora?<i></i></summary><p>Una correduría es un intermediario independiente: no vende los productos de una sola compañía, sino que compara entre varias y te asesora. La aseguradora, en cambio, solo comercializa sus propias pólizas.</p></details>
+   <details><summary>¿Contratar a través de Cascudo cuesta más que hacerlo directamente?<i></i></summary><p>No. El precio de la póliza es el de la aseguradora; la correduría cobra una comisión de la compañía. Tú recibes asesoramiento, comparación y gestión sin coste añadido.</p></details>
+   <details><summary>¿Qué hago si tengo un siniestro?<i></i></summary><p>Llama a nuestros teléfonos de asistencia o a tu oficina. Nuestro departamento de siniestros te guía y gestiona el parte con la aseguradora.</p></details>
+   <details><summary>¿Tenéis oficinas cerca de mí?<i></i></summary><p>Tenemos siete oficinas en Galicia (Narón, A Coruña, Vigo, Nigrán, Pontevedra, Ribadumia y Sanxenxo) y atendemos a clientes de toda España por teléfono, WhatsApp y online.</p></details>
+   <details><summary>¿Cómo puedo ser colaborador de Cascudo?<i></i></summary><p>Si tienes una inmobiliaria, asesoría, clínica u otro negocio con clientes que necesitan seguros, puedes colaborar con nosotros y contar con el respaldo y la formación de una correduría registrada.</p></details>
+  </div>
+ </div>
+</section>
+
+<div class="band" id="presupuesto"><div class="wrap bin">
+ <h2 class="rv">Hablamos sin compromiso</h2>
+ <div class="rv d1" style="display:flex;gap:14px;flex-wrap:wrap"><a class="btn" style="background:#fff;color:var(--navy)" href="#">Pedir presupuesto <span class="ar">→</span></a><a class="btn btn-line" href="tel:+34981325961">Llamar al 981 325 961</a></div>
+</div></div>
+</main>
+
+<footer>
+ <div class="wrap">
+  <div class="g">
+   <div><img src="https://www.cascudo.es/wp-content/uploads/2023/11/logo-cascudo-300x39-1.png" alt="Cascudo" width="231" height="30"><p>Correduría de seguros independiente con sede en Narón y oficinas en toda Galicia. Atendemos a clientes de toda España.</p><p style="margin-top:14px">981 325 961 · cascudo@cascudo.es</p></div>
+   <div><h4>Seguros</h4><ul><li><a href="#">Particulares</a></li><li><a href="#">Empresas</a></li><li><a href="#">Hogar</a></li><li><a href="#">Salud</a></li><li><a href="#">Responsabilidad civil</a></li></ul></div>
+   <div><h4>Cascudo</h4><ul><li><a href="#">Sobre nosotros</a></li><li><a href="#">Oficinas</a></li><li><a href="#">Hazte colaborador</a></li><li><a href="#">Blog</a></li><li><a href="#">Contacto</a></li></ul></div>
+   <div><h4>Oficinas</h4><ul><li>Narón (sede)</li><li>A Coruña</li><li>Vigo</li><li>Pontevedra</li><li>Nigrán · Ribadumia · Sanxenxo</li></ul></div>
+  </div>
+  <div class="legal"><span>© Cascudo Correduría de Seguros · Correduría inscrita en el Registro de la DGSFP con clave J2354</span><span><a href="#">Aviso legal</a> · <a href="#">Privacidad</a> · <a href="#">Cookies</a></span></div>
+ </div>
+</footer>
+
+<div id="peek"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+(function(){
+  var hd=document.getElementById('hd'),prog=document.getElementById('prog'),bg=document.getElementById('herobg');
+  var red=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function onScroll(){
+    var y=window.scrollY||0;
+    hd.classList.toggle('solid',y>40);
+    var h=document.documentElement.scrollHeight-innerHeight; prog.style.width=(h>0?y/h*100:0)+'%';
+    if(!red&&bg&&y<innerHeight) bg.style.transform='translate3d(0,'+(y*.18)+'px,0) scale(1)';
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  // reveal
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+  // contadores
+  var co=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;co.unobserve(e.target);var el=e.target,to=+el.dataset.to,plus=el.dataset.plus;
+    if(red){el.textContent=(plus?'+':'')+to;return;}
+    var t0=null;(function f(t){if(!t0)t0=t;var p=Math.min((t-t0)/1400,1),v=Math.round(to*(1-Math.pow(1-p,3)));el.textContent=(plus?'+':'')+v;if(p<1)requestAnimationFrame(f)})(performance.now());
+  })},{threshold:.6});
+  document.querySelectorAll('[data-to]').forEach(function(el){co.observe(el)});
+  // vista previa al pasar por las filas
+  var peek=document.getElementById('peek');
+  if(matchMedia('(hover:hover) and (min-width:981px)').matches){
+    document.querySelectorAll('.row').forEach(function(r){
+      r.addEventListener('mouseenter',function(){peek.style.backgroundImage='url('+r.dataset.img+')';peek.classList.add('on')});
+      r.addEventListener('mouseleave',function(){peek.classList.remove('on')});
+      r.addEventListener('mousemove',function(e){peek.style.left=Math.min(e.clientX+330,innerWidth-170)+'px';peek.style.top=e.clientY+'px'});
+    });
+  }
+  // mapa de oficinas
+  if(window.L&&document.getElementById("gmap")){var m=L.map("gmap",{scrollWheelZoom:false,zoomControl:true});L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"&copy; OpenStreetMap",maxZoom:18}).addTo(m);var O=[["Narón (sede)",43.4897,-8.2020,1],["A Coruña",43.3571,-8.3994],["Vigo",42.2380,-8.7155],["Nigrán",42.1401,-8.8065],["Pontevedra",42.4298,-8.6601],["Ribadumia",42.5010,-8.7684],["Sanxenxo",42.4003,-8.8072]],b=[];O.forEach(function(o){L.marker([o[1],o[2]],{icon:L.divIcon({className:"",html:"<div class=\"pin"+(o[3]?" s":"")+"\"></div>",iconSize:[24,24],iconAnchor:[12,12]})}).addTo(m).bindPopup("<strong>"+o[0]+"</strong>");b.push([o[1],o[2]]);});m.fitBounds(b,{padding:[40,40]});}
+  // inclinación 3D suave
+  var tilt=document.getElementById('tilt');
+  if(tilt&&!red&&matchMedia('(hover:hover)').matches){
+    tilt.addEventListener('mousemove',function(e){var b=tilt.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;tilt.style.transform='perspective(1000px) rotateY('+(x*6)+'deg) rotateX('+(-y*5)+'deg)'});
+    tilt.addEventListener('mouseleave',function(){tilt.style.transform=''});
+  }
+})();
+</script>
+</body>
+</html>
